@@ -29,24 +29,6 @@ class _MyAppState extends State<MyApp> {
     TrackerSDKConfig trackerSDKConfig =
         new TrackerSDKConfig("ABCDEFGHIJKL", "development");
 
-    TrackierEvent trackierEvent = new TrackierEvent("eventID");
-    trackierEvent.revenue = 10.0;
-    trackierEvent.currency = "INR";
-    trackierEvent.orderId = "orderID";
-    trackierEvent.param1 = "param1";
-    trackierEvent.param2 = "param2";
-    trackierEvent.param3 = "param3";
-    trackierEvent.param4 = "param4";
-    trackierEvent.param5 = "param5";
-    trackierEvent.param6 = "param6";
-    trackierEvent.param7 = "param7";
-    trackierEvent.param8 = "param8";
-    trackierEvent.param9 = "param9";
-    trackierEvent.param10 = "param10";
-
-    trackierEvent.setEventValue("eventValue1", "eventValue1");
-    trackierEvent.setEventValue("eventValue2", 1);
-
     print("trackierfluttersdk start");
 
     Trackierfluttersdk.setUserId("userId");
@@ -58,7 +40,6 @@ class _MyAppState extends State<MyApp> {
     Trackierfluttersdk.setUserAdditonalDetail(userAdditonalDetail);
 
     Trackierfluttersdk.initializeSDK(trackerSDKConfig);
-    Trackierfluttersdk.trackerEvent(trackierEvent);
     print("trackierfluttersdk end");
 
     String platformVersion;
@@ -80,18 +61,64 @@ class _MyAppState extends State<MyApp> {
       _platformVersion = platformVersion;
     });
   }
-
-  @override
+@override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
-      ),
+          appBar: AppBar(
+            title: Text('Trackier Flutter Sample App'),
+          ),
+          body: Center(
+              child: Column(children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(25),
+              child: FlatButton(
+                child: Text(
+                  'Track Event',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                color: Colors.cyan,
+                textColor: Colors.black,
+                onPressed:_trackSimpleEvent,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(25),
+              child: FlatButton(
+                child: Text(
+                  'Track Revenue Event',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                color: Colors.cyan,
+                textColor: Colors.black,
+                onPressed: _trackRevenueEvent,
+              ),
+            ),
+          ]))),
     );
   }
+
+    _trackSimpleEvent() {
+      TrackierEvent trackierEvent = new TrackierEvent("eventID");
+      trackierEvent.orderId = "orderID";
+      trackierEvent.param1 = "param1";
+      trackierEvent.param2 = "param2";
+      trackierEvent.setEventValue("ev1", "eventValue1");
+      trackierEvent.setEventValue("ev2", 1);
+      Trackierfluttersdk.trackerEvent(trackierEvent);
+
+    }
+
+    _trackRevenueEvent() {
+      TrackierEvent trackierEvent = new TrackierEvent("eventID");
+      trackierEvent.revenue = 10.0;
+      trackierEvent.currency = "INR";
+      trackierEvent.orderId = "orderID";
+      trackierEvent.param1 = "param1";
+      trackierEvent.param2 = "param2";
+      trackierEvent.setEventValue("ev1", "eventValue1");
+      trackierEvent.setEventValue("ev2", 1);
+      Trackierfluttersdk.trackerEvent(trackierEvent);
+
+    }
 }
