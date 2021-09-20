@@ -11,16 +11,16 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         result("iOS " + UIDevice.current.systemVersion)
-        if(call.method == "setUserId"){
+        if(call.method == "setUserId") {
             let dict = call.arguments as? String
             if(dict != nil) { setUserId(dict: dict!) }
-        } else  if(call.method == "setUserEmail"){
+        } else  if(call.method == "setUserEmail") {
             let dict = call.arguments as? String
             if(dict != nil) { setUserEmail(dict: dict!) }
-        } else  if(call.method == "setUserAdditonalDetail"){
+        } else  if(call.method == "setUserAdditonalDetail") {
             let dict = call.arguments as? [String:Any]
             if(dict != nil) { setUserAdditionalDetails(dict: dict!) }
-        } else  if(call.method == "initializeSDK"){
+        } else  if(call.method == "initializeSDK") {
             let dict = call.arguments as? [String:Any]
             if(dict != nil) { initializeSDK(dict: dict) }
         } else if (call.method == "trackierEvent") {
