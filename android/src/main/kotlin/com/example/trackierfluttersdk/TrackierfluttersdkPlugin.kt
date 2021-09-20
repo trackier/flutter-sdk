@@ -61,17 +61,16 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         var appToken = ""
         var environment = " "
         val configMap = call.arguments as MutableMap<*, *>
-        // App token.
+        
         if (configMap.containsKey("appToken")) {
             appToken = configMap.get("appToken") as String
         }
-        // Environment.
+
         if (configMap.containsKey("environment")) {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
         TrackierSDK.initialize(trackierSDKConfig)
-        Log.d("com.trackier.flutter", "initializeSDK: appToken" + appToken + " environment " + environment)
     }
 
     private fun setUserId(call: MethodCall, result: Result) {
@@ -81,7 +80,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             userId = configMap
         }
         TrackierSDK.setUserId(userId)
-        Log.d("com.trackier.flutter", "setUserId: userId" + userId )
     }
 
     private fun setUserEmail(call: MethodCall, result: Result) {
@@ -91,7 +89,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             userEmail = configMap
         }
         TrackierSDK.setUserEmail(userEmail)
-        Log.d("com.trackier.flutter", "setUserEmail: userEmail" + userEmail )
     }
 
    private fun setUserAdditonalDetail(call: MethodCall, result: Result) {
@@ -101,7 +98,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             userAddtionalDetail = configMap.get("userAddtionalDetail") as MutableMap<String,Any>
         }
        TrackierSDK.setUserAdditionalDetails(userAddtionalDetail)
-        Log.d("com.trackier.flutter", "setUserAdditonalDetail: userAddtionalDetail" + userAddtionalDetail.toString() )
     }
 
 
@@ -121,9 +117,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         var param9: String? = null
         var param10: String? = null
         var revenue: Double? = null
-
         var ev = mutableMapOf<String, Any>()
-
         lateinit var trackierEvent: TrackierEvent
 
         val configMap = call.arguments as MutableMap<*, *>
@@ -212,6 +206,3 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(null)
     }
 }
-
-//Samsung
-//3779337398

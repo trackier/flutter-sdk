@@ -32,13 +32,11 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
     
     func setUserId(dict: String) -> Void {
         let userId = dict
-        print("userId: ",userId)
         TrackierSDK.setUserID(userId: userId)
     }
     
     func setUserEmail(dict: String) -> Void {
         let userEmail = dict
-        print("userEmail: ",userEmail)
         TrackierSDK.setUserEmail(userEmail: userEmail);
     }
     
