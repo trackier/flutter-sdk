@@ -1,7 +1,7 @@
 name: trackierfluttersdk
 description: A new flutter plugin project.
-version: 0.0.1
-homepage:
+version: 1.0.1
+homepage: https://github.com/trackier/flutter-sdk
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
