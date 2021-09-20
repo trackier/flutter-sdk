@@ -41,9 +41,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
     }
     
     func setUserAdditionalDetails(dict: Dictionary<String, Any>) -> Void {
-        print(dict)
         let userAdditionalDetails = dict
-        print(userAdditionalDetails)
         TrackierSDK.setUserAdditionalDetails(userAdditionalDetails: userAdditionalDetails);
     }
     
