@@ -40,8 +40,8 @@ With Flutter:</p>
 ```
 
 <p>Then navigate to your project in the terminal and run:</p>
-```dart
- dependencies:
+
+```gradle
   $ flutter packages get
 ```
 
