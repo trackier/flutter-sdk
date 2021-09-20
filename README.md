@@ -36,7 +36,7 @@ With Flutter:</p>
 
 ```dart
  dependencies:
-  trackierfluttersdk: ^1.0.0
+  trackierfluttersdk: ^1.0.1
 ```
 
 <p>Then navigate to your project in the terminal and run:</p>
