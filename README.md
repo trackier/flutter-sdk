@@ -107,7 +107,7 @@ Inside the class, inside initPlatformState function , initialize SDK
 ```
 
 - The first argument is your Trackier Sdk api key.
-- The second argument is environment which can be either “development” and “production”
+- The second argument is environment which can be either "development" or "production" or "testing"
 - After that pass the sdkConfig reference to TrackierSDK.initialize method.
 
 ## <a id="qs-assosoiate-user-info"></a>Assosiate User Info during initialization of sdk
