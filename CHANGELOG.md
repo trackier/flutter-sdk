@@ -1,3 +1,3 @@
-## 1.0.0
+## 1.1.0
 
-- TODO: Describe initial release.
+- Update ios minimum deployment target issue
