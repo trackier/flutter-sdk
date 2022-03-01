@@ -18,6 +18,7 @@
   - [Track Simple Event](#qs-track-simple-event)
   - [Track with Currency & Revenue Event](#qs-track-event-with-currencey)
   - [Add custom params with event](#qs-add-custom-parms-event)
+- [Track Uninstall for Android](#qs-track-uninstall-android)
 - [Proguard Settings](#qs-progaurd-trackier-sdk)
 
 ## <a id="qs-add-trackier-sdk"></a>Add Trackier SDK to your app
@@ -181,6 +182,40 @@ To assosiate Customer Id , Customer Email and Customer additional params during 
 - First create a map
 - Pass its reference to event.ev param of event
 - Pass event reference to trackEvent method of TrackerSDK
+
+## <a id="qs-track-uninstall-android"></a>Track Uninstall for Android
+
+#### Before you begin
+* [Install `firebase_core`](https://firebase.flutter.dev/docs/overview) and add the initialization code to your app if you haven't already.
+* Add your app to your Firebase project in the [Firebase console](https://console.firebase.google.com/).
+
+#### Add the Analytics SDK to your app
+
+* From the root of your Flutter project, run the following command to install the plugin:
+	```sh
+	  flutter pub add firebase_analytics
+	```
+* Once complete, rebuild your Flutter application:
+	```sh
+	  flutter run
+	```
+* Once installed, you can access the `firebase_analytics` plugin by importing it in your Dart code:
+	```dart
+	  import 'package:firebase_analytics/firebase_analytics.dart';
+	```
+* Create a new Firebase Analytics instance by calling the `instance` getter on `FirebaseAnalytics`:
+	```dart
+	  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+	```
+* Use the `analytics` instance obtained above to set the following user property:
+	```dart
+	  analytics.setUserProperty(name: "ct_objectId", value: TrackierSDK.getTrackierId());
+	``` 
+
+* Adding the above code to your app sets up a common identifier. 
+* Set the `app_remove` event as a conversion event in Firebase. 
+* Use the Firebase cloud function to send uninstall information to Trackier MMP. 
+* You can find the support article [here](https://help.trackier.com/support/solutions/articles/31000162841-android-uninstall-tracking).
 
 ## <a id="qs-progaurd-trackier-sdk"></a>Proguard Settings
 
