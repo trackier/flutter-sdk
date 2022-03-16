@@ -1,3 +1,3 @@
-## 1.1.0
+## 1.2.0
 
-- Update ios minimum deployment target issue
+- Update package name add secret id support

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:trackierfluttersdk/trackierfluttersdk.dart';
+import 'package:trackier_flutter_sdk/trackierfluttersdk.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('trackierfluttersdk');
