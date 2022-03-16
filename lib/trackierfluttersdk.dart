@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:trackier_flutter_sdk/trackierevent.dart';
+import 'package:trackier_sdk_flutter/trackierevent.dart';
 import 'trackierconfig.dart';
 import 'dart:io' show Platform;
 
