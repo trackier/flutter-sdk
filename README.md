@@ -30,14 +30,14 @@
 With Flutter:</p>
 
 ```gradle
- $ flutter pub add trackierfluttersdk
+ $ flutter pub add trackier_flutter_sdk
 ```
 
 <p>This will add a line like this to your package's pubspec.yaml</p>
 
 ```dart
  dependencies:
-  trackierfluttersdk: ^1.0.1
+  trackier_flutter_sdk: ^1.2.0
 ```
 
 <p>Then navigate to your project in the terminal and run:</p>
