@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'trackier_sdk_flutter'
-  s.version          = '1.2.0'
+  s.version          = '1.2.1'
   s.summary          = 'Trackier flutter SDK'
   s.description      = <<-DESC
 This is Trackier flutter SDK

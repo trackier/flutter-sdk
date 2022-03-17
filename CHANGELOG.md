@@ -1,3 +1,3 @@
-## 1.2.0
+## 1.2.1
 
-- Update package name add secret id support
+- Update android dependency
