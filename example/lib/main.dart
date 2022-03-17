@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:trackierfluttersdk/trackierfluttersdk.dart';
-import 'package:trackierfluttersdk/trackierconfig.dart';
-import 'package:trackierfluttersdk/trackierevent.dart';
+import 'package:trackier_sdk_flutter/trackierfluttersdk.dart';
+import 'package:trackier_sdk_flutter/trackierconfig.dart';
+import 'package:trackier_sdk_flutter/trackierevent.dart';
 
 void main() {
   runApp(MyApp());

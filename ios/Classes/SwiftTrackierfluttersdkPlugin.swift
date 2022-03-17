@@ -50,7 +50,6 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
         let environment = "\(dict?["environment"] as? String ?? "")"
         let config = TrackierSDKConfig(appToken: appToken , env: environment)
         TrackierSDK.initialize(config: config)
-        
     }
     
     func trackEvent(dict: Optional<Dictionary<String, Any>>) -> Void {

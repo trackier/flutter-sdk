@@ -32,16 +32,15 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
-
             "setUserId" -> {
               setUserId(call,result);
             }
 
-             "setUserEmail" -> {
+            "setUserEmail" -> {
               setUserEmail(call,result);
             }
 
-             "setUserAdditonalDetail" -> {
+            "setUserAdditonalDetail" -> {
                setUserAdditonalDetail(call,result);
             }
 
@@ -50,26 +49,35 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             }
 
             "trackierEvent" -> {
-                trackierEvent(call, result)
+                trackEvent(call, result)
             }
-
-
         }
     }
 
     private fun initializeSDK(call: MethodCall, result: Result) {
         var appToken = ""
-        var environment = " "
+        var environment = ""
+        var secretId = ""
+        var secretKey = ""
         val configMap = call.arguments as MutableMap<*, *>
         
         if (configMap.containsKey("appToken")) {
             appToken = configMap.get("appToken") as String
         }
 
+        if (configMap.containsKey("secretId")) {
+            secretId = configMap.get("secretId") as String
+        }
+
+        if (configMap.containsKey("secretKey")) {
+            secretKey = configMap.get("secretKey") as String
+        }
+
         if (configMap.containsKey("environment")) {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
+        trackierSDKConfig.setAppSecret(secretId, secretKey)
         TrackierSDK.initialize(trackierSDKConfig)
     }
 
@@ -101,8 +109,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     }
 
 
-    private fun trackierEvent(call: MethodCall, result: Result) {
-
+    private fun trackEvent(call: MethodCall, result: Result) {
         var eventId: String? = null
         var orderId: String? = null
         var currency: String? = null

@@ -30,14 +30,14 @@
 With Flutter:</p>
 
 ```gradle
- $ flutter pub add trackierfluttersdk
+ $ flutter pub add trackier_sdk_flutter
 ```
 
 <p>This will add a line like this to your package's pubspec.yaml</p>
 
 ```dart
  dependencies:
-  trackierfluttersdk: ^1.0.1
+  trackier_sdk_flutter: ^1.2.0
 ```
 
 <p>Then navigate to your project in the terminal and run:</p>
@@ -90,9 +90,9 @@ Import the following libraries
 ---
 
 ```dart
-    import 'package:trackierfluttersdk/trackierfluttersdk.dart';
-    import 'package:trackierfluttersdk/trackierconfig.dart';
-    import 'package:trackierfluttersdk/trackierevent.dart';
+    import 'package:trackier_sdk_flutter/trackierfluttersdk.dart';
+    import 'package:trackier_sdk_flutter/trackierconfig.dart';
+    import 'package:trackier_sdk_flutter/trackierevent.dart';
 ```
 
 <p>

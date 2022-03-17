@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:trackierfluttersdk/trackierevent.dart';
+import 'package:trackier_sdk_flutter/trackierevent.dart';
 import 'trackierconfig.dart';
 import 'dart:io' show Platform;
 
 class Trackierfluttersdk {
-  static const MethodChannel _channel =
-      const MethodChannel('trackierfluttersdk');
+  static const MethodChannel _channel = const MethodChannel('trackierfluttersdk');
 
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
