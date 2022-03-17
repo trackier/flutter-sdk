@@ -8,6 +8,7 @@
   - [Add the SDK ](#qs-add-sdk)
   - [Adding Android install referrer to your app](#qs-add-install-referre)
   - [Add required permissions](#qs-add-request-permissions)
+  - [Getting Google Advertising ID](#qs-getting-gaid)
   - [Update Pod Dependencies](#qs-update-pod-dependencies)
 - [Implement and initialize the SDK](#qs-implement-trackier-sdk)
   - [Retrieve your dev key](#qs-retrieve-dev-key)
@@ -52,22 +53,44 @@ With Flutter:</p>
 Add the Android Install Referrer as a dependency. You can find the latest version [here]()
 
 ```gradle
-  dependencies {
-    // make sure to use the latest SDK version:
-
-    implementation 'com.android.installreferrer:installreferrer:2.2'
-  }
+dependencies {
+  // make sure to use the latest SDK version:
+  implementation 'com.android.installreferrer:installreferrer:2.2'
+}
 ```
 
 ## <a id="qs-add-request-permissions"></a>Add required permissions
 
-```java
+```xml
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
   <!-- Optional : -->
   <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+```
+
+## <a id="qs-getting-gaid"></a> Getting Google Advertising ID
+
+- Add the google advertising id dependency in your **android/app/build.gradle**
+
+```gradle
+dependencies {
+  // This can be added where the SDK dependency has been added
+  implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+}
+```
+- Update your Android Manifest file located in **android/app/src/main/AndroidManifest.xml**. This is required if your app is targeting devices with android version 12+
+
+```xml
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+```
+
+- Add meta data inside the application tag
+```xml
+<meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 ```
 
 ## <a id="qs-update-pod-dependencies"></a> Update Pod Dependencies
