@@ -13,6 +13,7 @@
   - [Retrieve your dev key](#qs-retrieve-dev-key)
   - [Initialize the SDK](#qs-initialize-trackier-sdk)
   - [Associate User Info during initialization of sdk](#qs-assosoiate-user-info)
+- [SDK Signing](#qs-sdk-signing)
 - [Track Events](#qs-track-event)
   - [Retrieve Event Id from dashboard](#qs-retrieve-event-id)
   - [Track Simple Event](#qs-track-simple-event)
@@ -133,6 +134,13 @@ To assosiate Customer Id , Customer Email and Customer additional params during 
 
 - The first method is to associate user Id in which
 - The second method is to associate user email in which
+
+## <a id="qs-sdk-signing"></a>SDK Signing
+```dart
+TrackerSDKConfig trackerSDKConfig =
+    new TrackerSDKConfig("xx-5865-44fc-8fca-xx", "production");
+trackerSDKConfig.setAppSecret("xxx", "xxx-xx");
+```
 
 ## <a id="qs-track-event"></a>Track Events
 
