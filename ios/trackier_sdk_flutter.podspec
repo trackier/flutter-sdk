@@ -1,9 +1,9 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint trackierfluttersdk.podspec` to validate before publishing.
+# Run `pod lib lint trackier_sdk_flutter.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'trackierfluttersdk'
+  s.name             = 'trackier_sdk_flutter'
   s.version          = '1.2.0'
   s.summary          = 'Trackier flutter SDK'
   s.description      = <<-DESC
