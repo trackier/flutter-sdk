@@ -39,7 +39,7 @@ With Flutter:</p>
 
 ```dart
  dependencies:
-  trackier_sdk_flutter: ^1.2.2
+  trackier_sdk_flutter: ^1.2.3
 ```
 
 <p>Then navigate to your project in the terminal and run:</p>
@@ -240,7 +240,8 @@ trackerSDKConfig.setAppSecret("xxx", "xxx-xx");
 	```
 * Use the `analytics` instance obtained above to set the following user property:
 	```dart
-	  analytics.setUserProperty(name: "ct_objectId", value: TrackierSDK.getTrackierId());
+    var trackierId = await Trackierfluttersdk.getTrackierId();
+	  analytics.setUserProperty(name: "ct_objectId", value: trackierId);
 	``` 
 
 * Adding the above code to your app sets up a common identifier. 

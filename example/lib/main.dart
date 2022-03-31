@@ -39,6 +39,9 @@ class _MyAppState extends State<MyApp> {
 
     Trackierfluttersdk.initializeSDK(trackerSDKConfig);
 
+    var trackierId = await Trackierfluttersdk.getTrackierId();
+    print('The value of trackierId is: $trackierId');
+
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.

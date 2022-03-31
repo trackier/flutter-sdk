@@ -31,4 +31,9 @@ class Trackierfluttersdk {
   static void setUserAdditonalDetail(Map userAdditonalDetail) {
     _channel.invokeMethod('setUserAdditonalDetail', userAdditonalDetail);
   }
+
+  static Future<String> getTrackierId() async {
+    final String installID = await _channel.invokeMethod('getTrackierId');
+    return installID;
+  }
 }

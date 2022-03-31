@@ -11,7 +11,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         result("iOS " + UIDevice.current.systemVersion)
-        if(call.method == "setUserId") {
+        if (call.method == "setUserId") {
             let dict = call.arguments as? String
             if(dict != nil) { setUserId(dict: dict!) }
         } else  if(call.method == "setUserEmail") {
@@ -27,7 +27,6 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
             let dict = call.arguments as? [String:Any]
             if(dict != nil) { trackEvent(dict: dict) }
         }
-        
     }
     
     func setUserId(dict: String) -> Void {

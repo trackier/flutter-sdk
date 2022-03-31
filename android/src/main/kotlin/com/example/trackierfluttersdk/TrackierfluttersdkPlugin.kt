@@ -33,15 +33,15 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
             "setUserId" -> {
-              setUserId(call,result);
+              setUserId(call, result);
             }
 
             "setUserEmail" -> {
-              setUserEmail(call,result);
+              setUserEmail(call, result);
             }
 
             "setUserAdditonalDetail" -> {
-               setUserAdditonalDetail(call,result);
+               setUserAdditonalDetail(call, result);
             }
 
             "initializeSDK" -> {
@@ -50,6 +50,10 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
 
             "trackierEvent" -> {
                 trackEvent(call, result)
+            }
+
+            "getTrackierId" -> {
+                getTrackierId(call, result)
             }
         }
     }
@@ -207,6 +211,11 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         Log.d("com.trackier.flutter", "ev: " + ev.toString())
 
         TrackierSDK.trackEvent(trackierEvent)
+    }
+
+    private fun getTrackierId(call: MethodCall, result: Result) {
+        val installID = TrackierSDK.getTrackierId()
+        result.success(installID)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
