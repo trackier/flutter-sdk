@@ -1,3 +1,3 @@
-## 1.2.3
+## 1.6.22
 
-- feat: getTrackierId
+- update: target SDK Version to 31
