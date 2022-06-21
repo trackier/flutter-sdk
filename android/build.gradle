@@ -2,14 +2,14 @@ group 'com.example.trackierfluttersdk'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.6.0'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,6 +17,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
+        // mavenLocal()
         mavenCentral()
     }
 }
@@ -25,7 +26,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -38,6 +39,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.annotation:annotation:1.2.0'
-    implementation 'com.trackier:android-sdk:1.6.19'
+    implementation 'com.trackier:android-sdk:1.6.22'
     implementation 'com.android.installreferrer:installreferrer:2.2'
 }
