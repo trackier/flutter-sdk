@@ -20,6 +20,10 @@ class Trackierfluttersdk {
     _channel.invokeMethod('trackierEvent', trackierEvent.toMap);
   }
 
+  static void trackEvent(TrackierEvent trackierEvent) {
+    _channel.invokeMethod('trackierEvent', trackierEvent.toMap);
+  }
+
   static void setUserId(String userId) {
     _channel.invokeMethod('setUserId', userId);
   }

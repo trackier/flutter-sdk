@@ -1,3 +1,3 @@
-## 1.6.22
+## 1.6.23
 
-- update: target SDK Version to 31
+- update: add trackEvent method
