@@ -1,3 +1,3 @@
-## 1.6.23
+## 1.6.24
 
-- update: add trackEvent method
+- update: trackier android SDK dep
