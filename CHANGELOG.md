@@ -1,3 +1,3 @@
-## 1.6.25
+## 1.6.26
 
-- update: trackier android SDK dependency
+- fix: userId and userEmail methods

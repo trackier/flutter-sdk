@@ -86,20 +86,12 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun setUserId(call: MethodCall, result: Result) {
-        var userId = ""
-        val configMap = call.arguments as String
-        if ("userId".equals(configMap)) {
-            userId = configMap
-        }
+        val userId = call.arguments as String
         TrackierSDK.setUserId(userId)
     }
 
     private fun setUserEmail(call: MethodCall, result: Result) {
-        var userEmail = ""
-        val configMap = call.arguments as String
-        if ("userEmail".equals(configMap)) {
-            userEmail = configMap
-        }
+        val userEmail = call.arguments as String
         TrackierSDK.setUserEmail(userEmail)
     }
 
