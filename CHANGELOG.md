@@ -1,3 +1,3 @@
-## 1.6.24
+## 1.6.25
 
-- update: trackier android SDK dep
+- update: trackier android SDK dependency
