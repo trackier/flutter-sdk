@@ -1,3 +1,3 @@
-## 1.6.26
+## 1.6.27
 
 - fix: userId and userEmail methods
