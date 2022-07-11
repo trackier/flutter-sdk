@@ -4,12 +4,12 @@
 
 ### Integration
 
-- [Add Trackier SDK to your app](#qs-add-trackier-sdk)
-  - [Add the SDK ](#qs-add-sdk)
+- [Quick start guide](#qs-add-trackier-sdk)
+  - [Add Flutter SDK to your app ](#qs-add-sdk)
+  - [Update Pod Dependencies](#qs-pod-update)
   - [Adding Android install referrer to your app](#qs-add-install-referre)
   - [Add required permissions](#qs-add-request-permissions)
   - [Getting Google Advertising ID](#qs-getting-gaid)
-  - [Update Pod Dependencies](#qs-update-pod-dependencies)
 - [Integrate and Initialize the Trackier SDK](#qs-implement-trackier-sdk)
   - [Retrieve your dev key](#qs-retrieve-dev-key)
   - [Initialize the SDK](#qs-initialize-trackier-sdk)
@@ -31,7 +31,7 @@ We have created a example app for the flutter sdk integration.
 
 Please check the [Example](https://github.com/trackier/flutter-sdk/tree/master/example) directory for know to how the `Trackier SDK` can be integrated.
 
-### <a id="qs-add-sdk"></a>Integrate Flutter SDK to your app
+### <a id="qs-add-sdk"></a>Add Flutter SDK to your app
 
 Flutter SDK is very easy to integrate in your app. Just need to follow some steps
 
@@ -57,7 +57,7 @@ After that run the below command to update the packages.
   $ flutter packages get
 ```
 
-### Update Pod Dependencies
+### <a id="qs-pod-update"></a>Update Pod Dependencies
 
 For iOS app make sure to go to ios folder and install Cocoapods dependencies:
 
@@ -65,7 +65,7 @@ For iOS app make sure to go to ios folder and install Cocoapods dependencies:
 $ cd ios && pod install
 ```
 
-## <a id="qs-add-install-referre"></a>Adding Android install referrer to your app
+### <a id="qs-add-install-referre"></a>Adding Android install referrer to your app
 
 Add the Android Install Referrer as a dependency in your app **`build.gradle`** . You can find the latest version [here](https://developer.android.com/google/play/installreferrer/library)
 
@@ -76,7 +76,7 @@ dependencies {
 }
 ```
 
-## <a id="qs-add-request-permissions"></a>Add required permissions
+### <a id="qs-add-request-permissions"></a>Add required permissions
 
 Trackier SDK need the following below permission in the AndroidManifest.xml
 
@@ -91,7 +91,7 @@ Please add the below permission in your app project AndroidManifest.xml. if they
   <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 ```
 
-## <a id="qs-getting-gaid"></a> Getting Google Advertising ID
+### <a id="qs-getting-gaid"></a> Getting Google Advertising ID
 
 Trackier SDK need the advertising id from the application.
 
@@ -120,7 +120,7 @@ dependencies {
 ```
 
 
-## <a id="qs-implement-trackier-sdk"></a>Integrate and Initialize the Trackier SDK
+### <a id="qs-implement-trackier-sdk"></a>Integrate and Initialize the Trackier SDK
 
 ### <a id="qs-retrieve-dev-key"></a>Retrieve your dev key
 
@@ -426,6 +426,8 @@ Trackier allow for passing the additional user details like UserName, Mobile Num
 * You can find the support article [here](https://help.trackier.com/support/solutions/articles/31000162841-android-uninstall-tracking).
 
 ### <a id="qs-sdk-signing"></a> SDK Signing
+
+
 
 ```dart
 
