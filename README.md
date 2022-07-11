@@ -145,7 +145,7 @@ Flutter sdk should be initialized in the `initState()` method under `main.dart` 
 
 Below are the example of initializing and calling the method of the sdk. 
 
-```
+```dart
 
 class _MyHomePageState extends State<MyHomePage> {
 
@@ -390,9 +390,9 @@ Trackier allow for passing the additional user details like UserName, Mobile Num
 
 ```
 
-## <a id="qs-track-uninstall-android"></a>Track Uninstall
+### <a id="qs-track-uninstall-android"></a> Track Uninstall
 
-#### Before you begin
+ **Before you begin**
 * [Install `firebase_core`](https://firebase.flutter.dev/docs/overview) and add the initialization code to your app if you haven't already.
 * Add your app to your Firebase project in the [Firebase console](https://console.firebase.google.com/).
 
@@ -425,8 +425,38 @@ Trackier allow for passing the additional user details like UserName, Mobile Num
 * Use the Firebase cloud function to send uninstall information to Trackier MMP. 
 * You can find the support article [here](https://help.trackier.com/support/solutions/articles/31000162841-android-uninstall-tracking).
 
+### <a id="qs-sdk-signing"></a> SDK Signing
 
-## <a id="qs-progaurd-trackier-sdk"></a>Proguard Settings
+```dart
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    initilalizeSdk();
+  }
+
+  Future<void> initilalizeSdk() async {
+
+    String key ="xxxx-xx-4505-bc8b-xx"; //Please pass your Development key here.
+
+    /*While Initializing the Sdk, You need to pass the two arguments in the TrackierSDKConfig.
+         * In First argument, you need to pass the Trackier SDK api key
+         * In second argument, you need to pass the environment which can be either "development", "production" or "testing". */
+
+    TrackerSDKConfig trackerSDKConfig = TrackerSDKConfig(key,"production");
+    trackerSDKConfig.setAppSecret("xxx", "xxx-xx");
+    Trackierfluttersdk.initializeSDK(trackerSDKConfig);
+
+
+  }
+}
+
+
+```
+
+### <a id="qs-progaurd-trackier-sdk"></a> Proguard Settings
 
 If your app is using proguard then add these lines to the proguard config file
 
