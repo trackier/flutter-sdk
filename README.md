@@ -21,7 +21,7 @@
   - [Pass the custom params in events](#qs-add-custom-parms-event)
   - [Passing User Data to SDK](#qs-add-user-data) 
   - [Passing Additional Data](#qs-add-additional-data)
-- [Track Uninstall](#qs-track-uninstall-android)
+- [Track Uninstall for Android](#qs-track-uninstall-android)
 - [SDK Signing](#qs-sdk-signing)
 - [Proguard Settings](#qs-progaurd-trackier-sdk)
 
@@ -390,7 +390,7 @@ Trackier allow for passing the additional user details like UserName, Mobile Num
 
 ```
 
-### <a id="qs-track-uninstall-android"></a> Track Uninstall
+### <a id="qs-track-uninstall-android"></a> Track Uninstall for Android
 
  **Before you begin**
 * [Install `firebase_core`](https://firebase.flutter.dev/docs/overview) and add the initialization code to your app if you haven't already.
