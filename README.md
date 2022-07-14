@@ -37,11 +37,12 @@ Flutter SDK is very easy to integrate in your app. Just need to follow some step
 
 You can add the flutter sdk in two ways:-
 
+
 1. By adding the below code in the package `pubspec.yaml` 
 
 ```
 dependencies:
-  trackier_sdk_flutter: ^1.6.26
+  trackier_sdk_flutter: ^1.6.27
 ```
 
 2. By using cli command. you need to run the below command in `terminal/cmd`.
