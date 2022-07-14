@@ -1,3 +1,3 @@
 ## 1.6.27
 
-- fix: userId and userEmail methods
+- feat: sdk type support
