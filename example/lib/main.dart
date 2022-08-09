@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     TrackerSDKConfig trackerSDKConfig =
-        new TrackerSDKConfig("0455721b-33c5-4c9f-805e-596d818d910a", "development");//xxfe3694-1ef5-430d-baa7-01ba36332xxx
+        new TrackerSDKConfig("xxfe3694-1ef5-430d-baa7-01ba36332xxx", "development");
 
     Trackierfluttersdk.setUserId("this_is_a_userId");
     Trackierfluttersdk.setUserEmail("userEmail@gmail.com");
