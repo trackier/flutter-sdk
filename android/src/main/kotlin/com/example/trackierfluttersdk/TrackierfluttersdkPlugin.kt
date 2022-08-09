@@ -167,8 +167,8 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             discount = configMap.get("discount") as Double
             trackierEvent.discount = discount.toFloat()
         }
-        if (configMap.containsKey("c_code")) {
-            couponCode = configMap.get("c_code") as String
+        if (configMap.containsKey("couponCode")) {
+            couponCode = configMap.get("couponCode") as String
             trackierEvent.couponCode = couponCode
         }
         if (configMap.containsKey("param1")) {

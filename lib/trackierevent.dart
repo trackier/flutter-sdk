@@ -34,7 +34,7 @@ class TrackierEvent {
     Map<String, Object?> eventMap = {
       'eventId': eventId,
       'orderId': orderId,
-      'c_code' : couponCode,
+      'couponCode' : couponCode,
       'discount' : discount,
       'currency': currency,
       'revenue': revenue,

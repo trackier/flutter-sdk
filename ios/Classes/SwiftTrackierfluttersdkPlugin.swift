@@ -73,10 +73,10 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
     func trackEvent(dict: Optional<Dictionary<String, Any>>) -> Void {
         let eventId: String = "\(dict?["eventId"] as? String ?? "")"
         let currency: String = "\(dict?["currency"] as? String ?? "")"
-        let revenue: String = "\(dict?["revenue"] as? String ?? "")"
+        let revenue: Float64 = (dict?["revenue"] as? Float64 ?? 0.0)
         let orderId: String = "\(dict?["orderId"] as? String ?? "")"
-        let discount: String = "\(dict?["discount"] as? String ?? "")"
-        let couponCode: String = "\(dict?["c_code"] as? String ?? "")"
+        let discount: Float64 = (dict?["discount"] as? Float64 ?? 0.0)
+        let couponCode: String = "\(dict?["couponCode"] as? String ?? "")"
         let param1: String = "\(dict?["param1"] as? String ?? "")"
         let param2: String = "\(dict?["param2"] as? String ?? "")"
         let param3: String = "\(dict?["param3"] as? String ?? "")"
@@ -94,10 +94,10 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
         }
         
         let event = TrackierEvent(id: eventId)
-        event.setRevenue(revenue: Float64((revenue as NSString).floatValue), currency: currency)
+        event.setRevenue(revenue: Float64(revenue), currency: currency)
         event.orderId = orderId
         event.setCouponCode(couponCode: couponCode)
-        event.setDiscount(discount: Float64((discount as NSString).floatValue))
+        event.setDiscount(discount: Float64(discount))
         event.param1  = param1
         event.param2  = param2
         event.param3  = param3
