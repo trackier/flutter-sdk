@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -100,6 +102,11 @@ class _MyAppState extends State<MyApp> {
 
     _trackSimpleEvent() {
       TrackierEvent trackierEvent = new TrackierEvent("1CFfUn3xEY");
+      trackierEvent.revenue = 10.0;
+      trackierEvent.discount = 2.0;
+      trackierEvent.couponCode = "test1";
+      Trackierfluttersdk.setUserName("abc");
+      Trackierfluttersdk.setUserPhone("6562127727");
       Trackierfluttersdk.trackerEvent(trackierEvent);
     }
 
@@ -110,6 +117,10 @@ class _MyAppState extends State<MyApp> {
       trackierEvent.orderId = "orderID";
       trackierEvent.param1 = "param1";
       trackierEvent.param2 = "param2";
+      trackierEvent.discount = 2.0;
+      trackierEvent.couponCode = "test1";
+      Trackierfluttersdk.setUserName("abc");
+      Trackierfluttersdk.setUserPhone("6562127727");
       trackierEvent.setEventValue("ev1", "eventValue1");
       trackierEvent.setEventValue("ev2", 1);
       Trackierfluttersdk.trackerEvent(trackierEvent);

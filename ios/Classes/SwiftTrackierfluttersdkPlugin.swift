@@ -17,7 +17,13 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
         } else  if(call.method == "setUserEmail") {
             let dict = call.arguments as? String
             if(dict != nil) { setUserEmail(dict: dict!) }
-        } else  if(call.method == "setUserAdditonalDetail") {
+        }else  if(call.method == "setUserPhone") {
+            let dict = call.arguments as? String
+            if(dict != nil) { setUserPhone(dict: dict!) }
+        }else  if(call.method == "setUserName") {
+            let dict = call.arguments as? String
+            if(dict != nil) { setUserName(dict: dict!) }
+        }else  if(call.method == "setUserAdditonalDetail") {
             let dict = call.arguments as? [String:Any]
             if(dict != nil) { setUserAdditionalDetails(dict: dict!) }
         } else  if(call.method == "initializeSDK") {
@@ -37,6 +43,16 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
     func setUserEmail(dict: String) -> Void {
         let userEmail = dict
         TrackierSDK.setUserEmail(userEmail: userEmail);
+    }
+
+    func setUserPhone(dict: String) -> Void {
+         let userPhone = dict
+         TrackierSDK.setUserPhone(userPhone: userPhone);
+    }
+
+    func setUserName(dict: String) -> Void {
+         let userName = dict
+         TrackierSDK.setUserName(userName: userName);
     }
     
     func setUserAdditionalDetails(dict: Dictionary<String, Any>) -> Void {
@@ -59,6 +75,8 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
         let currency: String = "\(dict?["currency"] as? String ?? "")"
         let revenue: String = "\(dict?["revenue"] as? String ?? "")"
         let orderId: String = "\(dict?["orderId"] as? String ?? "")"
+        let discount: String = "\(dict?["discount"] as? String ?? "")"
+        let couponCode: String = "\(dict?["c_code"] as? String ?? "")"
         let param1: String = "\(dict?["param1"] as? String ?? "")"
         let param2: String = "\(dict?["param2"] as? String ?? "")"
         let param3: String = "\(dict?["param3"] as? String ?? "")"
@@ -78,6 +96,8 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
         let event = TrackierEvent(id: eventId)
         event.setRevenue(revenue: Float64((revenue as NSString).floatValue), currency: currency)
         event.orderId = orderId
+        event.setCouponCode(couponCode: couponCode)
+        event.setDiscount(discount: Float64((discount as NSString).floatValue))
         event.param1  = param1
         event.param2  = param2
         event.param3  = param3
