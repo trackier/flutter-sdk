@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 class TrackierEvent {
   String eventId = "";
   String orderId = "";
+  String couponCode = "";
+  double discount = 0.0;
   double revenue = 0.0;
   String currency = "";
   String param1 = "";
@@ -32,6 +34,8 @@ class TrackierEvent {
     Map<String, Object?> eventMap = {
       'eventId': eventId,
       'orderId': orderId,
+      'couponCode' : couponCode,
+      'discount' : discount,
       'currency': currency,
       'revenue': revenue,
       'param1': param1,

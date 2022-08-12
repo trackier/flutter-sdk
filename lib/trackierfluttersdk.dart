@@ -32,6 +32,14 @@ class Trackierfluttersdk {
     _channel.invokeMethod('setUserEmail', userEmail);
   }
 
+  static void setUserPhone(String userPhone) {
+    _channel.invokeMethod('setUserPhone', userPhone);
+  }
+
+  static void setUserName(String userName) {
+    _channel.invokeMethod('setUserName', userName);
+  }
+
   static void setUserAdditonalDetail(Map userAdditonalDetail) {
     _channel.invokeMethod('setUserAdditonalDetail', userAdditonalDetail);
   }

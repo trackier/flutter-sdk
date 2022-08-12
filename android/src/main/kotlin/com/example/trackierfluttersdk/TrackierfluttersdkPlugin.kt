@@ -55,6 +55,14 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "getTrackierId" -> {
                 getTrackierId(call, result)
             }
+
+            "setUserName" -> {
+                setUserName(call, result)
+            }
+
+            "setUserPhone" -> {
+                setUserPhone(call, result)
+            }
         }
     }
 
@@ -81,7 +89,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.27")
+        trackierSDKConfig.setSDKVersion("1.6.29")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         TrackierSDK.initialize(trackierSDKConfig)
@@ -95,6 +103,16 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     private fun setUserEmail(call: MethodCall, result: Result) {
         val userEmail = call.arguments as String
         TrackierSDK.setUserEmail(userEmail)
+    }
+
+    private fun setUserName(call: MethodCall, result: Result) {
+        val userName = call.arguments as String
+        TrackierSDK.setUserName(userName)
+    }
+
+    private fun setUserPhone(call: MethodCall, result: Result) {
+        val userPhone = call.arguments as String
+        TrackierSDK.setUserPhone(userPhone)
     }
 
    private fun setUserAdditonalDetail(call: MethodCall, result: Result) {
@@ -111,6 +129,8 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         var eventId: String? = null
         var orderId: String? = null
         var currency: String? = null
+        var discount: Double? = null
+        var couponCode: String? = null
         var param1: String? = null
         var param2: String? = null
         var param3: String? = null
@@ -142,6 +162,14 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         if (configMap.containsKey("currency")) {
             currency = configMap.get("currency") as String
             trackierEvent.currency = currency
+        }
+        if (configMap.containsKey("discount")) {
+            discount = configMap.get("discount") as Double
+            trackierEvent.discount = discount.toFloat()
+        }
+        if (configMap.containsKey("couponCode")) {
+            couponCode = configMap.get("couponCode") as String
+            trackierEvent.couponCode = couponCode
         }
         if (configMap.containsKey("param1")) {
             param1 = configMap.get("param1") as String
