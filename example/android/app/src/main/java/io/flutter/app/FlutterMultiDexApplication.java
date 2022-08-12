@@ -7,13 +7,12 @@
 
 package io.flutter.app;
 
-import android.app.Application;
 import android.content.Context;
 import androidx.annotation.CallSuper;
 import androidx.multidex.MultiDex;
 
 /**
- * Extension of {@link android.app.Application}, adding multidex support.
+ * Extension of {@link io.flutter.app.FlutterApplication}, adding multidex support.
  */
 public class FlutterMultiDexApplication extends FlutterApplication {
   @Override
