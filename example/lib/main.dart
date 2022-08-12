@@ -28,10 +28,10 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    TrackerSDKConfig trackerSDKConfig =
-        new TrackerSDKConfig("xxfe3694-1ef5-430d-baa7-01ba36332xxx", "development");
+    TrackerSDKConfig trackerSDKConfig = new TrackerSDKConfig(
+        "xxfe3694-1ef5-430d-baa7-01ba36332xxx", "development");
 
-    Trackierfluttersdk.setUserId("this_is_a_userId");
+    Trackierfluttersdk.setUserId("737263"); //Pass your userid
     Trackierfluttersdk.setUserEmail("userEmail@gmail.com");
 
     var userAdditonalDetail = Map<String, Object>();
@@ -63,7 +63,8 @@ class _MyAppState extends State<MyApp> {
       _platformVersion = platformVersion;
     });
   }
-@override
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -81,7 +82,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 color: Colors.cyan,
                 textColor: Colors.black,
-                onPressed:_trackSimpleEvent,
+                onPressed: _trackSimpleEvent,
               ),
             ),
             Container(
@@ -100,34 +101,27 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-    _trackSimpleEvent() {
-      TrackierEvent trackierEvent = new TrackierEvent("1CFfUn3xEY");
-      trackierEvent.revenue = 70.0;
-      trackierEvent.discount = 2.0;
-      trackierEvent.currency = "INR";
-      trackierEvent.orderId = "orderID";
-      trackierEvent.param1 = "param1";
-      trackierEvent.param2 = "param2";
-      trackierEvent.couponCode = "test1";
-      Trackierfluttersdk.setUserName("abc");
-      Trackierfluttersdk.setUserPhone("6562127727");
-      Trackierfluttersdk.trackerEvent(trackierEvent);
-    }
+  _trackSimpleEvent() {
+    TrackierEvent trackierEvent = new TrackierEvent("1CFfUn3xEY");
+    Trackierfluttersdk.setUserId("798e9w8ew09e8"); // Pass your userId here
+    Trackierfluttersdk.setUserName("abc");
+    Trackierfluttersdk.setUserPhone("6562127727");
+    Trackierfluttersdk.trackerEvent(trackierEvent);
+  }
 
-    _trackRevenueEvent() {
-      TrackierEvent trackierEvent = new TrackierEvent("1CFfUn3xEY");
-      trackierEvent.revenue = 10.0;
-      trackierEvent.currency = "INR";
-      trackierEvent.orderId = "orderID";
-      trackierEvent.param1 = "param1";
-      trackierEvent.param2 = "param2";
-      trackierEvent.discount = 2.0;
-      trackierEvent.couponCode = "test1";
-      Trackierfluttersdk.setUserName("abc");
-      Trackierfluttersdk.setUserPhone("6562127727");
-      trackierEvent.setEventValue("ev1", "eventValue1");
-      trackierEvent.setEventValue("ev2", 1);
-      Trackierfluttersdk.trackerEvent(trackierEvent);
-
-    }
+  _trackRevenueEvent() {
+    TrackierEvent trackierEvent = new TrackierEvent("1CFfUn3xEY");
+    trackierEvent.revenue = 10.0;
+    trackierEvent.currency = "INR";
+    trackierEvent.orderId = "orderID";
+    trackierEvent.param1 = "param1";
+    trackierEvent.param2 = "param2";
+    trackierEvent.discount = 2.0;
+    trackierEvent.couponCode = "test1";
+    Trackierfluttersdk.setUserName("abc");
+    Trackierfluttersdk.setUserPhone("6562127727");
+    trackierEvent.setEventValue("ev1", "eventValue1");
+    trackierEvent.setEventValue("ev2", 1);
+    Trackierfluttersdk.trackerEvent(trackierEvent);
+  }
 }
