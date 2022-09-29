@@ -94,9 +94,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         trackierSDKConfig.setAppSecret(secretId, secretKey)
     
         if (configMap.containsKey("deeplinkCallbacks")) {
-            Log.d("xxxx","deeplinkCallbacks");
             val dartMethodName = configMap["deeplinkCallbacks"] as String?
-            Log.d("xxxx","deeplinkCallbacksname--"+dartMethodName);
             if (dartMethodName != null) {
                 if (channel != null) {
                     trackierSDKConfig.setDeepLinkListener(object : DeepLinkListener {
@@ -105,7 +103,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
                             val uriParamsMap = HashMap<String, String>()
                             uriParamsMap["uri"] = result.getUrl()
                             Handler(Looper.getMainLooper()).post { channel.invokeMethod(dartMethodName, uriParamsMap) }
-                            Log.d("xxxx","deeplink Logs"+result.getUrl());
                         }
                     })
                 }
