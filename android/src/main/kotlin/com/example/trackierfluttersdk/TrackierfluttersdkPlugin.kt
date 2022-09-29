@@ -4,9 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.annotation.NonNull
-import com.trackier.sdk.TrackierEvent
-import com.trackier.sdk.TrackierSDK
-import com.trackier.sdk.TrackierSDKConfig
+import com.trackier.sdk.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -23,7 +21,15 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
     private lateinit var context : Context
     private lateinit var trackierSDKConfig: TrackierSDKConfig
-
+    
+    object deepLinkListener : DeepLinkListener {
+        var deeplinkUrl: String = ""
+        override fun onDeepLinking(result: DeepLink) {
+            // we have deepLink object and we can get any valve from Object
+            deeplinkUrl = result.getUrl()
+        }
+    }
+    
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "trackierfluttersdk")
         channel.setMethodCallHandler(this)
@@ -63,6 +69,10 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "setUserPhone" -> {
                 setUserPhone(call, result)
             }
+            
+            "deeplinkCallbacks" -> {
+                getDeeplinkUrl(call, result)
+            }
         }
     }
 
@@ -89,9 +99,10 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.29")
+        trackierSDKConfig.setSDKVersion("1.6.30")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
+        trackierSDKConfig.setDeepLinkListener(deepLinkListener)
         TrackierSDK.initialize(trackierSDKConfig)
     }
 
@@ -238,6 +249,10 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     private fun getTrackierId(call: MethodCall, result: Result) {
         val installID = TrackierSDK.getTrackierId()
         result.success(installID)
+    }
+    
+    private fun getDeeplinkUrl(call: MethodCall, result: Result) {
+        result.success(deepLinkListener.deeplinkUrl)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {

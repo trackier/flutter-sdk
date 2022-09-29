@@ -48,4 +48,10 @@ class Trackierfluttersdk {
     final String installID = await _channel.invokeMethod('getTrackierId');
     return installID;
   }
+
+  static Future<String> getDeeplinkCallbacks() async {
+    final String uri = await _channel.invokeMethod('deeplinkCallbacks');
+    return uri;
+  }
+
 }
