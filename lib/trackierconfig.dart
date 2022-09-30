@@ -31,13 +31,11 @@ class TrackerSDKConfig {
           case _deferredDeeplinkCallbackName:
             if (deferredDeeplinkCallback != null) {
               String? uri = call.arguments['uri'];
-              if (deferredDeeplinkCallback != null) {
-                deferredDeeplinkCallback!(uri);
-              }
+              deferredDeeplinkCallback!(uri);
             }
             break;
         }
-      }catch (e) {
+      } catch (e) {
         print(e.toString());
       }
     });
@@ -49,7 +47,7 @@ class TrackerSDKConfig {
       'environment': envirnoment,
       'secretId': secretId,
       'secretKey': secretKey,
-      'deeplinkCallbacks' : _deferredDeeplinkCallbackName,
+      'deeplinkCallback' : _deferredDeeplinkCallbackName,
     };
 
     return configMap;

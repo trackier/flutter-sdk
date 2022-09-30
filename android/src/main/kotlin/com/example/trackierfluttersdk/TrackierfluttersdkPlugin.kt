@@ -93,10 +93,9 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
     
-        if (configMap.containsKey("deeplinkCallbacks")) {
-            val dartMethodName = configMap["deeplinkCallbacks"] as String?
-            if (dartMethodName != null) {
-                if (channel != null) {
+        if (configMap.containsKey("deeplinkCallback")) {
+            val dartMethodName = configMap["deeplinkCallback"] as String?
+            if (dartMethodName != null && channel != null) {
                     trackierSDKConfig.setDeepLinkListener(object : DeepLinkListener {
                         override fun onDeepLinking(result: DeepLink) {
                             // we have deepLink object and we can get any valve from Object
@@ -105,7 +104,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
                             Handler(Looper.getMainLooper()).post { channel.invokeMethod(dartMethodName, uriParamsMap) }
                         }
                     })
-                }
             }
         }
         TrackierSDK.initialize(trackierSDKConfig)
