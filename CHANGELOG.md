@@ -1,4 +1,4 @@
-## 1.6.29
+## 1.6.30
 
 - feat: additional fields in events
   Add support for user name
