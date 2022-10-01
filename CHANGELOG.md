@@ -1,3 +1,3 @@
 ## 1.6.30
 
-- feat: deferred deeplinking support
+- feat: deferred deeplinking support for android
