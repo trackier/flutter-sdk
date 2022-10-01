@@ -2,11 +2,11 @@ package com.example.trackierfluttersdk
 
 import android.app.Application
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.annotation.NonNull
-import com.trackier.sdk.TrackierEvent
-import com.trackier.sdk.TrackierSDK
-import com.trackier.sdk.TrackierSDKConfig
+import com.trackier.sdk.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -89,9 +89,23 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.29")
+        trackierSDKConfig.setSDKVersion("1.6.30")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
+    
+        if (configMap.containsKey("deeplinkCallback")) {
+            val dartMethodName = configMap["deeplinkCallback"] as String?
+            if (dartMethodName != null && channel != null) {
+                    trackierSDKConfig.setDeepLinkListener(object : DeepLinkListener {
+                        override fun onDeepLinking(result: DeepLink) {
+                            // we have deepLink object and we can get any valve from Object
+                            val uriParamsMap = HashMap<String, String>()
+                            uriParamsMap["uri"] = result.getUrl()
+                            Handler(Looper.getMainLooper()).post { channel.invokeMethod(dartMethodName, uriParamsMap) }
+                        }
+                    })
+            }
+        }
         TrackierSDK.initialize(trackierSDKConfig)
     }
 
