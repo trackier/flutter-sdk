@@ -498,9 +498,9 @@ For example, you could set up an activity called FirstActivity to open like this
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
             <data
-                android:host="www.trackier.com"
+                android:host="trackier.u9ilnk.me"
                 android:pathPrefix="/product"
-                android:scheme="unilink" />
+                android:scheme="https" />
         </intent-filter>
         </activity>
 
