@@ -507,7 +507,7 @@ For example, you could set up an activity called FirstActivity to open like this
 ```
 
 ```
-unilink://www.trackier.com/product?dlv=FirstProduct&quantity=10&pid=sms
+https://trackier.u9ilnk.me/product?dlv=FirstProduct&quantity=10&pid=sms
 ```
 
 ### Deferred Deep linking
