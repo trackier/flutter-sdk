@@ -1,3 +1,3 @@
-## 1.6.31
+## 1.6.32
 
-- feat: deferred deeplinking support for android
+- fix: session tracking edge case
