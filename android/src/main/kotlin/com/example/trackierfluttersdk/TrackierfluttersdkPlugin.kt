@@ -89,7 +89,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.30")
+        trackierSDKConfig.setSDKVersion("1.6.33")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
     
