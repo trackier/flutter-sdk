@@ -1,3 +1,3 @@
-## 1.6.32
+## 1.6.33
 
-- fix: session tracking edge case
+- fix: Google-play policy fix
