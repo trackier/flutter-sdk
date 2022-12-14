@@ -67,6 +67,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin {
 		let secretKey = "\(dict?["secretKey"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
+        config.setSDKVersion(sdkVersion: "1.6.33")
 		TrackierSDK.initialize(config: config)
 	}
 	
