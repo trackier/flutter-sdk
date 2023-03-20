@@ -4,17 +4,22 @@ import trackier_ios_sdk
 
 public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkListener {
 	
-	static var channel = FlutterMethodChannel()
+    private var channel: FlutterMethodChannel
+    
+    init(channel: FlutterMethodChannel) {
+        self.channel = channel
+    }
+    
 	
 	public func onDeepLinking(result: trackier_ios_sdk.DeepLink) {
 		var dict = Dictionary<String, Any>()
 		dict["uri"] = result.getUrlParams()
-		SwiftTrackierfluttersdkPlugin.channel.invokeMethod("deferred-deeplink", arguments: dict)
+		self.channel.invokeMethod("deferred-deeplink", arguments: dict)
 	}
 	
 	public static func register(with registrar: FlutterPluginRegistrar) {
-		channel = FlutterMethodChannel(name: "trackierfluttersdk", binaryMessenger: registrar.messenger())
-		let instance = SwiftTrackierfluttersdkPlugin()
+		let channel = FlutterMethodChannel(name: "trackierfluttersdk", binaryMessenger: registrar.messenger())
+        let instance = SwiftTrackierfluttersdkPlugin(channel: channel)
 		registrar.addMethodCallDelegate(instance, channel: channel)
 	}
 	
