@@ -4,12 +4,11 @@ import trackier_ios_sdk
 
 public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkListener {
 	
-    private var channel: FlutterMethodChannel
-    
-    init(channel: FlutterMethodChannel) {
-        self.channel = channel
-    }
-    
+	private var channel: FlutterMethodChannel
+	
+	private init(channel: FlutterMethodChannel) {
+		self.channel = channel
+	}
 	
 	public func onDeepLinking(result: trackier_ios_sdk.DeepLink) {
 		var dict = Dictionary<String, Any>()
@@ -19,7 +18,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	
 	public static func register(with registrar: FlutterPluginRegistrar) {
 		let channel = FlutterMethodChannel(name: "trackierfluttersdk", binaryMessenger: registrar.messenger())
-        let instance = SwiftTrackierfluttersdkPlugin(channel: channel)
+		let instance = SwiftTrackierfluttersdkPlugin(channel: channel)
 		registrar.addMethodCallDelegate(instance, channel: channel)
 	}
 	
