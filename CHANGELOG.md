@@ -1,3 +1,3 @@
-## 1.6.33
+## 1.6.39
 
-- fix: Google-play policy fix
+- update: Added deferred deeplinking in ios 
