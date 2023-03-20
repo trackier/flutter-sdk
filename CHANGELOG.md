@@ -1,3 +1,3 @@
-## 1.6.39
+## 1.6.40
 
-- update: Added deferred deeplinking in ios 
+- update: version upgrade in class
