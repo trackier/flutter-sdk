@@ -29,8 +29,10 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     TrackerSDKConfig trackerSDKConfig = new TrackerSDKConfig(
-        "xxfe3694-1ef5-430d-baa7-01ba36332xxx", "development");
-
+        "0455721b-xxxx-xxxx-xxxx-596d818d910a", "development");
+    trackerSDKConfig.deferredDeeplinkCallback = (uri){
+      print('The value of deeplinkUrl is: $uri');
+    };
     Trackierfluttersdk.setUserId("737263"); //Pass your userid
     Trackierfluttersdk.setUserEmail("userEmail@gmail.com");
 
