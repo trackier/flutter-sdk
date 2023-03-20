@@ -3,15 +3,15 @@ import UIKit
 import trackier_ios_sdk
 
 public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkListener {
-    
-    static var channel = FlutterMethodChannel()
-    
-    public func onDeepLinking(result: trackier_ios_sdk.DeepLink) {
-        var dict = Dictionary<String, Any>()
-        dict["uri"] = result.getUrlParams()
-        SwiftTrackierfluttersdkPlugin.channel.invokeMethod("deferred-deeplink", arguments: dict)
-    }
-    
+	
+	static var channel = FlutterMethodChannel()
+	
+	public func onDeepLinking(result: trackier_ios_sdk.DeepLink) {
+		var dict = Dictionary<String, Any>()
+		dict["uri"] = result.getUrlParams()
+		SwiftTrackierfluttersdkPlugin.channel.invokeMethod("deferred-deeplink", arguments: dict)
+	}
+	
 	public static func register(with registrar: FlutterPluginRegistrar) {
 		channel = FlutterMethodChannel(name: "trackierfluttersdk", binaryMessenger: registrar.messenger())
 		let instance = SwiftTrackierfluttersdkPlugin()
@@ -74,13 +74,13 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let environment = "\(dict?["environment"] as? String ?? "")"
 		let secretId = "\(dict?["secretId"] as? String ?? "")"
 		let secretKey = "\(dict?["secretKey"] as? String ?? "")"
-        let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
+		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
 		config.setSDKVersion(sdkVersion: "1.6.33")
-        if (!deeplinkKey.isEmpty) {
-            config.setDeeplinkListerner(listener: self)
-        }
+		if (!deeplinkKey.isEmpty) {
+			config.setDeeplinkListerner(listener: self)
+		}
 		TrackierSDK.initialize(config: config)
 	}
 	
