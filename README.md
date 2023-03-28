@@ -428,8 +428,20 @@ Trackier allow for passing the additional user details like UserName, Mobile Num
 * You can find the support article [here](https://help.trackier.com/support/solutions/articles/31000162841-android-uninstall-tracking).
 
 ### <a id="qs-sdk-signing"></a> SDK Signing
+Following below are the steps to retrieve the secretId and secretKey :-
 
+- Login your Trackier Panel and select your application.
+- In the Dashboard, click on the `SDK Integration` option on the left side of panel. 
+- Under on the SDK Integration, click on the Advanced tab. 
+- Under the Advanced tab, you will get the secretId and secretKey.
 
+Please check on the below screenshot
+
+Screenshot[7]
+
+<img width="1000" alt="Screenshot 7" src="https://user-images.githubusercontent.com/16884982/185338826-bcf802d0-c493-4a67-adb3-a9b52bae289e.png">
+
+Check below the example code for passing the secretId and secretKey to the SDK
 
 ```dart
 
