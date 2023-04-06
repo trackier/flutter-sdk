@@ -39,6 +39,9 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		} else if (call.method == "setUserAdditonalDetail") {
 			let dict = call.arguments as? [String:Any]
 			if (dict != nil) { setUserAdditionalDetails(dict: dict!) }
+		} else if (call.method == "updatePostbackConversion") {
+			let dict = call.arguments as? Int
+			if (dict != nil) { updatePostbackConversion(dict: dict!) }
 		} else if (call.method == "initializeSDK") {
 			let dict = call.arguments as? [String:Any]
 			if (dict != nil) { initializeSDK(dict: dict) }
@@ -73,6 +76,11 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		TrackierSDK.setUserAdditionalDetails(userAdditionalDetails: userAdditionalDetails);
 	}
 	
+	func updatePostbackConversion(dict: Int) -> Void {
+		let postbackConversion = dict
+		TrackierSDK.updatePostbackConversion(conversionValue: postbackConversion)
+	}
+	
 	func initializeSDK(dict: Optional<Dictionary<String, Any>>) -> Void {
 		let appToken = "\(dict?["appToken"] as? String ?? "")"
 		let environment = "\(dict?["environment"] as? String ?? "")"
@@ -81,7 +89,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.40")
+		config.setSDKVersion(sdkVersion: "1.6.41")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}

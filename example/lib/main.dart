@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
     trackerSDKConfig.deferredDeeplinkCallback = (uri){
       print('The value of deeplinkUrl is: $uri');
     };
+    Trackierfluttersdk.updatePostbackConversion(0);
     Trackierfluttersdk.setUserId("737263"); //Pass your userid
     Trackierfluttersdk.setUserEmail("userEmail@gmail.com");
 
