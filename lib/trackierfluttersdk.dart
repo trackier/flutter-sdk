@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'package:flutter/services.dart';
 import 'package:trackier_sdk_flutter/trackierevent.dart';
 import 'trackierconfig.dart';
@@ -38,6 +39,10 @@ class Trackierfluttersdk {
 
   static void setUserName(String userName) {
     _channel.invokeMethod('setUserName', userName);
+  }
+
+  static void updatePostbackConversion(int conversion) {
+    _channel.invokeMethod('updatePostbackConversion', conversion);
   }
 
   static void setUserAdditonalDetail(Map userAdditonalDetail) {

@@ -43,7 +43,7 @@ You can add the flutter sdk in two ways:-
 
 ```
 dependencies:
-  trackier_sdk_flutter: ^1.6.40
+  trackier_sdk_flutter: ^1.6.41
 ```
 
 2. By using cli command. you need to run the below command in `terminal/cmd`.

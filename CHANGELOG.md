@@ -1,3 +1,3 @@
-## 1.6.40
+## 1.6.41
 
-- update: version upgrade in class
+- update: added updatePostbackConversion function in iOS
