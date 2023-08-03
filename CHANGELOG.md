@@ -1,3 +1,3 @@
-## 1.6.41
+## 1.6.46
 
-- update: added updatePostbackConversion function in iOS
+- update: added the campaigns data functions

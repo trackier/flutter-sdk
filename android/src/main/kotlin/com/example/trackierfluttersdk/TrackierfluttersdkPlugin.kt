@@ -63,6 +63,74 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "setUserPhone" -> {
                 setUserPhone(call, result)
             }
+    
+            "getAd" -> {
+                getAd(call, result)
+            }
+    
+            "getAdID" -> {
+                getAdID(call, result)
+            }
+    
+            "getAdSet" -> {
+                getAdSet(call, result)
+            }
+    
+            "getAdSetID" -> {
+                getAdSetID(call, result)
+            }
+    
+            "getCampaign" -> {
+                getCampaign(call, result)
+            }
+    
+            "getCampaignID" -> {
+                getCampaignID(call, result)
+            }
+    
+            "getChannel" -> {
+                getChannel(call, result)
+            }
+    
+            "getP1" -> {
+                getP1(call, result)
+            }
+    
+            "getP2" -> {
+                getP2(call, result)
+            }
+    
+            "getP3" -> {
+                getP3(call, result)
+            }
+    
+            "getP4" -> {
+                getP4(call, result)
+            }
+    
+            "getP5" -> {
+                getP5(call, result)
+            }
+    
+            "getClickId" -> {
+                getClickId(call, result)
+            }
+    
+            "getDlv" -> {
+                getDlv(call, result)
+            }
+    
+            "getPid" -> {
+                getPid(call, result)
+            }
+    
+            "getIsRetargeting" -> {
+                getIsRetargeting(call, result)
+            }
+    
+            "setPreinstallAttribution" -> {
+                setPreinstallAttribution(call, result)
+            }
         }
     }
 
@@ -89,7 +157,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.41")
+        trackierSDKConfig.setSDKVersion("1.6.46")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
     
@@ -253,7 +321,76 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         val installID = TrackierSDK.getTrackierId()
         result.success(installID)
     }
-
+    
+    private fun getAd(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getAd())
+    }
+    private fun getAdID(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getAdID())
+    }
+    private fun getAdSet(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getAdSet())
+    }
+    
+    private fun getAdSetID(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getAdSetID())
+    }
+    
+    private fun getCampaign(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getCampaign())
+    }
+    
+    private fun getCampaignID(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getCampaignID())
+    }
+    
+    private fun getChannel(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getChannel())
+    }
+    
+    private fun getP1(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getP1())
+    }
+    
+    private fun getP2(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getP2())
+    }
+    
+    private fun getP3(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getP3())
+    }
+    
+    private fun getP4(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getP4())
+    }
+    
+    private fun getP5(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getP5())
+    }
+    
+    private fun getClickId(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getClickId())
+    }
+    
+    private fun getDlv(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getDlv())
+    }
+    
+    private fun getPid(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getPid())
+    }
+    
+    private fun getIsRetargeting(call: MethodCall, result: Result) {
+        result.success(TrackierSDK.getIsRetargeting())
+    }
+    
+    private fun setPreinstallAttribution(call: MethodCall, result: Result) {
+        val pid = call.argument<String>("pid").toString()
+        val campaign = call.argument<String>("campaign").toString()
+        val campaignId = call.argument<String>("campaignId").toString()
+        TrackierSDK.setPreinstallAttribution(pid, campaign, campaignId)
+    }
+    
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
