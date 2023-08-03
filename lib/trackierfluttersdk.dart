@@ -49,8 +49,73 @@ class Trackierfluttersdk {
     _channel.invokeMethod('setUserAdditonalDetail', userAdditonalDetail);
   }
 
+  static void setPreinstallAttribution(String pid, String campaign, String campaignId) {
+    final Map<String, String> parameters = {'pid': pid, 'campaign': campaign, 'campaignId': campaignId,};
+    _channel.invokeMethod('setPreinstallAttribution', parameters);
+  }
+
   static Future<String> getTrackierId() async {
     final String installID = await _channel.invokeMethod('getTrackierId');
     return installID;
+  }
+
+  static Future<String> getAd() async {
+    return await _channel.invokeMethod('getAd');
+  }
+
+  static Future<String> getAdID() async {
+    return await _channel.invokeMethod('getAdID');
+  }
+
+  static Future<String> getAdSet() async {
+    return await _channel.invokeMethod('getAdSet');
+  }
+
+  static Future<String> getAdSetID() async {
+    return await _channel.invokeMethod('getAdSetID');
+  }
+
+  static Future<String> getCampaign() async {
+    return await _channel.invokeMethod('getCampaign');
+  }
+
+  static Future<String> getCampaignID() async {
+    return await _channel.invokeMethod('getCampaignID');
+  }
+
+  static Future<String> getP1() async {
+    return await _channel.invokeMethod('getP1');
+  }
+
+  static Future<String> getP2() async {
+    return await _channel.invokeMethod('getP2');
+  }
+
+  static Future<String> getP3() async {
+    return await _channel.invokeMethod('getP3');
+  }
+
+  static Future<String> getP4() async {
+    return await _channel.invokeMethod('getP4');
+  }
+
+  static Future<String> getP5() async {
+    return await _channel.invokeMethod('getP5');
+  }
+
+  static Future<String> getClickId() async {
+    return await _channel.invokeMethod('getClickId');
+  }
+
+  static Future<String> getDlv() async {
+    return await _channel.invokeMethod('getDlv');
+  }
+
+  static Future<String> getPid() async {
+    return await _channel.invokeMethod('getPid');
+  }
+
+  static Future<String> getIsRetargeting() async {
+    return await _channel.invokeMethod('getIsRetargeting');
   }
 }

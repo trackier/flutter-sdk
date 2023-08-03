@@ -23,31 +23,63 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	}
 	
 	public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-		result("iOS " + UIDevice.current.systemVersion)
-		if (call.method == "setUserId") {
-			let dict = call.arguments as? String
-			if (dict != nil) { setUserId(dict: dict!) }
-		} else if (call.method == "setUserEmail") {
-			let dict = call.arguments as? String
-			if (dict != nil) { setUserEmail(dict: dict!) }
-		} else if (call.method == "setUserPhone") {
-			let dict = call.arguments as? String
-			if (dict != nil) { setUserPhone(dict: dict!) }
-		} else if (call.method == "setUserName") {
-			let dict = call.arguments as? String
-			if (dict != nil) { setUserName(dict: dict!) }
-		} else if (call.method == "setUserAdditonalDetail") {
-			let dict = call.arguments as? [String:Any]
-			if (dict != nil) { setUserAdditionalDetails(dict: dict!) }
-		} else if (call.method == "updatePostbackConversion") {
-			let dict = call.arguments as? Int
-			if (dict != nil) { updatePostbackConversion(dict: dict!) }
-		} else if (call.method == "initializeSDK") {
-			let dict = call.arguments as? [String:Any]
-			if (dict != nil) { initializeSDK(dict: dict) }
-		} else if (call.method == "trackierEvent") {
-			let dict = call.arguments as? [String:Any]
-			if (dict != nil) { trackEvent(dict: dict) }
+		//result("iOS " + UIDevice.current.systemVersion)
+			if (call.method == "setUserId") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setUserId(dict: dict!) }
+			} else if (call.method == "setUserEmail") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setUserEmail(dict: dict!) }
+			} else if (call.method == "setUserPhone") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setUserPhone(dict: dict!) }
+			} else if (call.method == "setUserName") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setUserName(dict: dict!) }
+			} else if (call.method == "setUserAdditonalDetail") {
+				let dict = call.arguments as? [String:Any]
+				if (dict != nil) { setUserAdditionalDetails(dict: dict!) }
+			} else if (call.method == "updatePostbackConversion") {
+				let dict = call.arguments as? Int
+				if (dict != nil) { updatePostbackConversion(dict: dict!) }
+			} else if (call.method == "initializeSDK") {
+				let dict = call.arguments as? [String:Any]
+				if (dict != nil) { initializeSDK(dict: dict) }
+			} else if (call.method == "trackierEvent") {
+				let dict = call.arguments as? [String:Any]
+				if (dict != nil) { trackEvent(dict: dict) }
+			} else if (call.method == "getAd") {
+				getAd(result: result)
+			} else if (call.method == "getAdID") {
+				getAdID(result: result)
+			} else if (call.method == "getAdSet") {
+				getAdSet(result: result)
+			} else if (call.method == "getAdSetID") {
+				getAdSetID(result: result)
+			} else if (call.method == "getCampaign") {
+				getCampaign(result: result)
+			} else if (call.method == "getCampaignID") {
+				getCampaignID(result: result)
+			} else if (call.method == "getP1") {
+				getP1(result: result)
+			} else if (call.method == "getP2") {
+				getP2(result: result)
+			} else if (call.method == "getP3") {
+				getP3(result: result)
+			} else if (call.method == "getP4") {
+				getP4(result: result)
+			} else if (call.method == "getP5") {
+				getP5(result: result)
+			} else if (call.method == "getClickId") {
+				getClickId(result: result)
+			} else if (call.method == "getDlv") {
+				getDlv(result: result)
+			} else if (call.method == "getPid") {
+				getPid(result: result)
+			} else if (call.method == "getIsRetargeting") {
+				getIsRetargeting(result: result)
+			} else {
+				result(FlutterMethodNotImplemented)
 		}
 	}
 	
@@ -81,6 +113,70 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		TrackierSDK.updatePostbackConversion(conversionValue: postbackConversion)
 	}
 	
+	func getAd(result: FlutterResult) -> Void {
+		result("sanu")
+	}
+	
+	func getAdID(result: FlutterResult) -> Void {
+		result("sanu22")
+	}
+	
+	func getAdSet(result: FlutterResult) -> Void {
+		result(TrackierSDK.getAdSet())
+	}
+	
+	func getAdSetID(result: FlutterResult) -> Void {
+		result(TrackierSDK.getAdSetID())
+	}
+	
+	func getCampaign(result: FlutterResult) -> Void {
+		result(TrackierSDK.getCampaign())
+	}
+	
+	func getCampaignID(result: FlutterResult) -> Void {
+		result(TrackierSDK.getCampaignID())
+	}
+	
+	func getChannel(result: FlutterResult) -> Void {
+		result(TrackierSDK.getChannel())
+	}
+	
+	func getP1(result: FlutterResult) -> Void {
+		result(TrackierSDK.getP1())
+	}
+	
+	func getP2(result: FlutterResult) -> Void {
+		result(TrackierSDK.getP2())
+	}
+	
+	func getP3(result: FlutterResult) -> Void {
+		result(TrackierSDK.getP3())
+	}
+	
+	func getP4(result: FlutterResult) -> Void {
+		result(TrackierSDK.getP4())
+	}
+	
+	func getP5(result: FlutterResult) -> Void {
+		result(TrackierSDK.getP5())
+	}
+	
+	func getClickId(result: FlutterResult) -> Void {
+		result(TrackierSDK.getClickId())
+	}
+	
+	func getDlv(result: FlutterResult) -> Void {
+		result(TrackierSDK.getDlv())
+	}
+	
+	func getPid(result: FlutterResult) -> Void {
+		result(TrackierSDK.getPid())
+	}
+	
+	func getIsRetargeting(result: FlutterResult) -> Void {
+		result(TrackierSDK.getIsRetargeting())
+	}
+	
 	func initializeSDK(dict: Optional<Dictionary<String, Any>>) -> Void {
 		let appToken = "\(dict?["appToken"] as? String ?? "")"
 		let environment = "\(dict?["environment"] as? String ?? "")"
@@ -89,7 +185,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.41")
+		config.setSDKVersion(sdkVersion: "1.6.46")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}
