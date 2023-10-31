@@ -7,7 +7,7 @@
 - [Quick start guide](#qs-add-trackier-sdk)
   - [Add Flutter SDK to your app ](#qs-add-sdk)
   - [Update Pod Dependencies](#qs-pod-update)
-  - [Adding Android install referrer to your app](#qs-add-install-referre)
+  - [Adding Android install referrer to your app](#qs-add-install-referrer)
   - [Add required permissions](#qs-add-request-permissions)
   - [Getting Google Advertising ID](#qs-getting-gaid)
 - [Integrate and Initialize the Trackier SDK](#qs-implement-trackier-sdk)
@@ -24,6 +24,7 @@
 - [Track Uninstall for Android](#qs-track-uninstall-android)
 - [SDK Signing](#qs-sdk-signing)
 - [Deep linking](#gs-deeplink)
+- [Getting Campaign Data](#gs-campaign-data)
 - [Proguard Settings](#qs-progaurd-trackier-sdk)
 
 ## <a id="qs-add-trackier-sdk"></a>Quick start guide
@@ -67,7 +68,7 @@ For iOS app make sure to go to ios folder and install Cocoapods dependencies:
 $ cd ios && pod install
 ```
 
-### <a id="qs-add-install-referre"></a>Adding Android install referrer to your app
+### <a id="qs-add-install-referrer"></a>Adding Android install referrer to your app
 
 Add the Android Install Referrer as a dependency in your app **`build.gradle`** . You can find the latest version [here](https://developer.android.com/google/play/installreferrer/library)
 
@@ -555,6 +556,31 @@ class _MyAppState extends State<MyApp> {
 ```
 
 
+### <a id="gs-campaign-data"></a> Getting Campaign Data
+For getting the campaign data, We have a function that return the campaign data. Please check below the example code.
+
+```dart
+_gettingCampaigData() {
+    TrackierEvent trackierEvent = new TrackierEvent("1CFfUn3xEY");
+    var ad = await Trackierfluttersdk.getAd();
+    var getAdID = await Trackierfluttersdk.getAdID();
+    var getCampaign = await Trackierfluttersdk.getCampaign();
+    var getCampaignID = await Trackierfluttersdk.getCampaignID();
+    var getAdSet = await Trackierfluttersdk.getAdSet();
+    var getAdSetID = await Trackierfluttersdk.getAdSetID();
+    var getP1 = await Trackierfluttersdk.getP1();
+    var getP2 = await Trackierfluttersdk.getP2();
+    var getP3 = await Trackierfluttersdk.getP3();
+    var getP4 = await Trackierfluttersdk.getP4();
+    var getP5 = await Trackierfluttersdk.getP5();
+    var getClickId = await Trackierfluttersdk.getClickId();
+    var getDlv = await Trackierfluttersdk.getDlv();
+    var getPid = await Trackierfluttersdk.getPid();
+    var getIsRetargeting = await Trackierfluttersdk.getIsRetargeting();
+    Trackierfluttersdk.trackerEvent(trackierEvent);
+  }
+
+```
 
 ### <a id="qs-progaurd-trackier-sdk"></a> Proguard Settings
 
