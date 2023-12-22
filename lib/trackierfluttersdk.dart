@@ -46,7 +46,7 @@ class Trackierfluttersdk {
   }
 
   static void setGender(Gender gender) {
-    _channel.invokeMethod('setGender', gender);
+    _channel.invokeMethod('setGender', gender.toString());
   }
 
   static void updatePostbackConversion(int conversion) {
