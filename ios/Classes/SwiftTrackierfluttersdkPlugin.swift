@@ -36,6 +36,12 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 			} else if (call.method == "setUserName") {
 				let dict = call.arguments as? String
 				if (dict != nil) { setUserName(dict: dict!) }
+			} else if (call.method == "setDOB") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setDOB(dict: dict!) }
+			} else if (call.method == "setGender") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setGender(dict: dict!) }
 			} else if (call.method == "setUserAdditonalDetail") {
 				let dict = call.arguments as? [String:Any]
 				if (dict != nil) { setUserAdditionalDetails(dict: dict!) }
@@ -101,6 +107,21 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	func setUserName(dict: String) -> Void {
 		let userName = dict
 		TrackierSDK.setUserName(userName: userName);
+	}
+	
+	func setDOB(dict: String) -> Void {
+		let dob = dict
+		TrackierSDK.setDOB(dob: dob)
+	}
+	
+	func setGender(dict: String) -> Void {
+		let gender = dict
+		switch gender {
+		case "Gender.Male": TrackierSDK.setGender(gender: .MALE)
+		case "Gender.Female": TrackierSDK.setGender(gender: .FEMALE)
+		case "Gender.Others": TrackierSDK.setGender(gender: .OTHERS)
+		default: print("No Gender found")
+		}
 	}
 	
 	func setUserAdditionalDetails(dict: Dictionary<String, Any>) -> Void {
@@ -185,7 +206,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.46")
+		config.setSDKVersion(sdkVersion: "1.6.48")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}

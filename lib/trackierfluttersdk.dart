@@ -41,6 +41,14 @@ class Trackierfluttersdk {
     _channel.invokeMethod('setUserName', userName);
   }
 
+  static void setDOB(String dob) {
+    _channel.invokeMethod('setDOB', dob);
+  }
+
+  static void setGender(Gender gender) {
+    _channel.invokeMethod('setGender', gender);
+  }
+
   static void updatePostbackConversion(int conversion) {
     _channel.invokeMethod('updatePostbackConversion', conversion);
   }
@@ -118,4 +126,10 @@ class Trackierfluttersdk {
   static Future<String> getIsRetargeting() async {
     return await _channel.invokeMethod('getIsRetargeting');
   }
+}
+
+enum Gender {
+  Male,
+  Female,
+  Others,
 }

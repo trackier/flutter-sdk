@@ -64,6 +64,14 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
                 setUserPhone(call, result)
             }
     
+            "setDOB" -> {
+                setDOB(call, result)
+            }
+    
+            "setGender" -> {
+                setGender(call, result)
+            }
+    
             "getAd" -> {
                 getAd(call, result)
             }
@@ -133,7 +141,8 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             }
         }
     }
-
+    
+    
     private fun initializeSDK(call: MethodCall, result: Result) {
         var appToken = ""
         var environment = ""
@@ -157,7 +166,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.46")
+        trackierSDKConfig.setSDKVersion("1.6.48")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
     
@@ -195,6 +204,20 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     private fun setUserPhone(call: MethodCall, result: Result) {
         val userPhone = call.arguments as String
         TrackierSDK.setUserPhone(userPhone)
+    }
+    
+    private fun setDOB(call: MethodCall, result: MethodChannel.Result) {
+        val dob = call.arguments as String
+        TrackierSDK.setDOB(dob)
+    }
+    
+    private fun setGender(call: MethodCall, result: MethodChannel.Result) {
+        val gender = call.arguments as String
+        when (gender) {
+            "Gender.Male" -> TrackierSDK.setGender(TrackierSDK.Gender.MALE)
+            "Gender.Female" -> TrackierSDK.setGender(TrackierSDK.Gender.Female)
+            "Gender.Others" -> TrackierSDK.setGender(TrackierSDK.Gender.OTHERS)
+        }
     }
 
    private fun setUserAdditonalDetail(call: MethodCall, result: Result) {
