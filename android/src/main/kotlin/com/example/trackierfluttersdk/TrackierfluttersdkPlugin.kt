@@ -445,7 +445,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     }
     
     private fun fireInstall() {
-        Log.d("trackier","private fun FireInstall")
         TrackierSDK.fireInstall()
     }
 }
