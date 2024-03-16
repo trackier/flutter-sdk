@@ -149,6 +149,10 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "parseDeeplink" -> {
                 parseDeeplink(call, result)
             }
+            
+            "fireInstall" -> {
+                fireInstall()
+            }
         }
     }
     
@@ -438,5 +442,10 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         val uriDeeplink = call.arguments as String
         val uri = Uri.parse(uriDeeplink)
         TrackierSDK.parseDeepLink(uri)
+    }
+    
+    private fun fireInstall() {
+        Log.d("trackier","private fun FireInstall")
+        TrackierSDK.fireInstall()
     }
 }

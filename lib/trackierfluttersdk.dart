@@ -135,6 +135,10 @@ class Trackierfluttersdk {
   static void parseDeeplink(String uri) {
     _channel.invokeMethod('parseDeeplink', uri);
   }
+
+  static void fireInstall() {
+    _channel.invokeMethod('fireInstall');
+  }
 }
 
 
