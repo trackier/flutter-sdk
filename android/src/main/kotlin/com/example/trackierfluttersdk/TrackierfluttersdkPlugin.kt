@@ -183,7 +183,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     
         if (configMap.containsKey("setManualMode")) {
             manualmode = configMap.get("setManualMode") as Boolean
-            Log.d("trackiersdk","manual mode"+ manualmode)
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
         trackierSDKConfig.setSDKVersion("1.6.56")
