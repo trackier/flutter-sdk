@@ -7,6 +7,7 @@ class TrackerSDKConfig {
   String envirnoment = "";
   String secretId = "";
   String secretKey = "";
+  bool manualMode = false;
 
   DeferredDeeplinkCallback? deferredDeeplinkCallback;
 
@@ -22,6 +23,10 @@ class TrackerSDKConfig {
   void setAppSecret(String secretId, String secretKey) {
     this.secretId = secretId;
     this.secretKey = secretKey;
+  }
+  
+  void setManualMode(bool value) {
+    this.manualMode = value;
   }
 
   void _initCallbackHandlers() {
@@ -41,13 +46,14 @@ class TrackerSDKConfig {
     });
   }
 
-  Map<String, String?> get toMap {
-    Map<String, String?> configMap = {
+  Map<String, dynamic> get toMap {
+    Map<String, dynamic> configMap = {
       'appToken': appToken,
       'environment': envirnoment,
       'secretId': secretId,
       'secretKey': secretKey,
       'deeplinkCallback' : _deferredDeeplinkCallbackName,
+      'setManualMode' : manualMode
     };
 
     return configMap;
