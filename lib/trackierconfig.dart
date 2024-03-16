@@ -8,6 +8,7 @@ class TrackerSDKConfig {
   String secretId = "";
   String secretKey = "";
   bool manualMode = false;
+  bool disableOrganic = false;
 
   DeferredDeeplinkCallback? deferredDeeplinkCallback;
 
@@ -27,6 +28,10 @@ class TrackerSDKConfig {
   
   void setManualMode(bool value) {
     this.manualMode = value;
+  }
+
+  void disableOrganicTracking(bool value) {
+    this.disableOrganic = value;
   }
 
   void _initCallbackHandlers() {
@@ -53,7 +58,8 @@ class TrackerSDKConfig {
       'secretId': secretId,
       'secretKey': secretKey,
       'deeplinkCallback' : _deferredDeeplinkCallbackName,
-      'setManualMode' : manualMode
+      'setManualMode' : manualMode,
+      'disableOrganicTracking' : disableOrganic
     };
 
     return configMap;

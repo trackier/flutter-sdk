@@ -163,6 +163,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         var secretId = ""
         var secretKey = ""
         var manualmode = false
+        var disableOrganic = false
         val configMap = call.arguments as MutableMap<*, *>
         
         if (configMap.containsKey("appToken")) {
@@ -184,11 +185,16 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         if (configMap.containsKey("setManualMode")) {
             manualmode = configMap.get("setManualMode") as Boolean
         }
+    
+        if (configMap.containsKey("disableOrganicTracking")) {
+            disableOrganic = configMap.get("disableOrganicTracking") as Boolean
+        }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
         trackierSDKConfig.setSDKVersion("1.6.56")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         trackierSDKConfig.setManualMode(manualmode)
+        trackierSDKConfig.disableOrganicTracking(disableOrganic)
     
         if (configMap.containsKey("deeplinkCallback")) {
             val dartMethodName = configMap["deeplinkCallback"] as String?
