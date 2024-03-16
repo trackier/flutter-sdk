@@ -2,6 +2,7 @@ package com.example.trackierfluttersdk
 
 import android.app.Application
 import android.content.Context
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -12,6 +13,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import java.net.URI
 
 
 /** TrackierfluttersdkPlugin */
@@ -139,6 +141,14 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "setPreinstallAttribution" -> {
                 setPreinstallAttribution(call, result)
             }
+            
+            "setLocalRefTrack" -> {
+                setLocalRefTrack(call, result)
+            }
+            
+            "parseDeeplink" -> {
+                parseDeeplink(call, result)
+            }
         }
     }
     
@@ -166,7 +176,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             environment = configMap.get("environment") as String
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.48")
+        trackierSDKConfig.setSDKVersion("1.6.56")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
     
@@ -214,9 +224,9 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     private fun setGender(call: MethodCall, result: MethodChannel.Result) {
         val gender = call.arguments as String
         when (gender) {
-            "Gender.Male" -> TrackierSDK.setGender(TrackierSDK.Gender.MALE)
+            "Gender.Male" -> TrackierSDK.setGender(TrackierSDK.Gender.Male)
             "Gender.Female" -> TrackierSDK.setGender(TrackierSDK.Gender.Female)
-            "Gender.Others" -> TrackierSDK.setGender(TrackierSDK.Gender.OTHERS)
+            "Gender.Others" -> TrackierSDK.setGender(TrackierSDK.Gender.Others)
         }
     }
 
@@ -416,5 +426,17 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
+    }
+    
+    private fun setLocalRefTrack(call: MethodCall, result: MethodChannel.Result) {
+        val boolValue = call.argument<Boolean>("boolValue")
+        val delimeter = call.argument<String>("delimeter")
+        TrackierSDK.setLocalRefTrack(boolValue!!, delimeter!!)
+    }
+    
+    private fun parseDeeplink(call: MethodCall, result: MethodChannel.Result) {
+        val uriDeeplink = call.arguments as String
+        val uri = Uri.parse(uriDeeplink)
+        TrackierSDK.parseDeepLink(uri)
     }
 }

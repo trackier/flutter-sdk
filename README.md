@@ -44,7 +44,7 @@ You can add the flutter sdk in two ways:-
 
 ```
 dependencies:
-  trackier_sdk_flutter: ^1.6.48
+  trackier_sdk_flutter: ^1.6.56
 ```
 
 2. By using cli command. you need to run the below command in `terminal/cmd`.
@@ -91,7 +91,9 @@ Please add the below permission in your app project AndroidManifest.xml. if they
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
   <!-- Optional : -->
-  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 ```
 
 ### <a id="qs-getting-gaid"></a> Getting Google Advertising ID
