@@ -1,3 +1,3 @@
-## 1.6.48
+## 1.6.56
 
-- feat: added demographic code
+- feat: added localRefCode and parseDeeplink code

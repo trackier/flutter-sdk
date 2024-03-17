@@ -135,11 +135,11 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	}
 	
 	func getAd(result: FlutterResult) -> Void {
-		result("sanu")
+		result(TrackierSDK.getAd())
 	}
 	
 	func getAdID(result: FlutterResult) -> Void {
-		result("sanu22")
+		result(TrackierSDK.getAdID())
 	}
 	
 	func getAdSet(result: FlutterResult) -> Void {
@@ -206,7 +206,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.48")
+		config.setSDKVersion(sdkVersion: "1.6.56")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}

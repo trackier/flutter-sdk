@@ -126,7 +126,21 @@ class Trackierfluttersdk {
   static Future<String> getIsRetargeting() async {
     return await _channel.invokeMethod('getIsRetargeting');
   }
+
+  static void setLocalRefTrack(bool value, String delimeter) {
+    final Map<String, dynamic> parameters = {'boolValue': value, 'delimeter': delimeter,};
+    _channel.invokeMethod('setLocalRefTrack', parameters);
+  }
+
+  static void parseDeeplink(String uri) {
+    _channel.invokeMethod('parseDeeplink', uri);
+  }
+
+  static void fireInstall() {
+    _channel.invokeMethod('fireInstall');
+  }
 }
+
 
 enum Gender {
   Male,
