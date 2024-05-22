@@ -188,7 +188,6 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     
         if (configMap.containsKey("disableOrganicTracking")) {
             disableOrganic = configMap.get("disableOrganicTracking") as Boolean
-            Log.d("trackiersdk","disable organic"+disableOrganic)
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
         trackierSDKConfig.setSDKVersion("1.6.57")
