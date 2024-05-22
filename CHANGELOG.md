@@ -1,3 +1,3 @@
-## 1.6.56
+## 1.6.57
 
-- feat: added localRefCode and parseDeeplink code
+- update: version upgrade 
