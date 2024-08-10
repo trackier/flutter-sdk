@@ -12,7 +12,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	
 	public func onDeepLinking(result: trackier_ios_sdk.DeepLink) {
 		var dict = Dictionary<String, Any>()
-		dict["uri"] = result.getUrlParams()
+		dict["uri"] = result.getUrl()
 		self.channel.invokeMethod("deferred-deeplink", arguments: dict)
 	}
 	
@@ -48,6 +48,9 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 			} else if (call.method == "updatePostbackConversion") {
 				let dict = call.arguments as? Int
 				if (dict != nil) { updatePostbackConversion(dict: dict!) }
+			} else if (call.method == "parseDeeplink") {
+				let dict = call.arguments as? String
+				if (dict != nil) { parseDeeplink(dict: dict!) }
 			} else if (call.method == "initializeSDK") {
 				let dict = call.arguments as? [String:Any]
 				if (dict != nil) { initializeSDK(dict: dict) }
@@ -84,6 +87,8 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 				getPid(result: result)
 			} else if (call.method == "getIsRetargeting") {
 				getIsRetargeting(result: result)
+			} else if (call.method == "getTrackierId") {
+				getTrackierId(result: result)
 			} else {
 				result(FlutterMethodNotImplemented)
 		}
@@ -132,6 +137,11 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	func updatePostbackConversion(dict: Int) -> Void {
 		let postbackConversion = dict
 		TrackierSDK.updatePostbackConversion(conversionValue: postbackConversion)
+	}
+	
+	func parseDeeplink(dict: String) -> Void {
+		let parseDeeplinkUrl = dict
+		TrackierSDK.parseDeepLink(uri: parseDeeplinkUrl)
 	}
 	
 	func getAd(result: FlutterResult) -> Void {
@@ -196,6 +206,10 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	
 	func getIsRetargeting(result: FlutterResult) -> Void {
 		result(TrackierSDK.getIsRetargeting())
+	}
+	
+	func getTrackierId(result: FlutterResult) -> Void {
+		result(TrackierSDK.getTrackierId())
 	}
 	
 	func initializeSDK(dict: Optional<Dictionary<String, Any>>) -> Void {
