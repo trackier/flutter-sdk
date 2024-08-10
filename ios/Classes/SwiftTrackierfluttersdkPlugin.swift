@@ -51,13 +51,13 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 			} else if (call.method == "parseDeeplink") {
 				let dict = call.arguments as? String
 				if (dict != nil) { parseDeeplink(dict: dict!) }
-            } else if (call.method == "setIMEI") {
-                let dict = call.arguments as? String
-                if (dict != nil) { setIMEI(dict: dict!) }
-            } else if (call.method == "setMacAddress") {
-                let dict = call.arguments as? String
-                if (dict != nil) { setMacAddress(dict: dict!) }
-            } else if (call.method == "initializeSDK") {
+			} else if (call.method == "setIMEI") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setIMEI(dict: dict!) }
+			} else if (call.method == "setMacAddress") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setMacAddress(dict: dict!) }
+			} else if (call.method == "initializeSDK") {
 				let dict = call.arguments as? [String:Any]
 				if (dict != nil) { initializeSDK(dict: dict) }
 			} else if (call.method == "trackierEvent") {
@@ -149,14 +149,14 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let parseDeeplinkUrl = dict
 		TrackierSDK.parseDeepLink(uri: parseDeeplinkUrl)
 	}
-    
-    func setMacAddress(dict: String) -> Void {
-        //do nothing, For android omly
-    }
-    
-    func setIMEI(dict: String) -> Void {
-        //do nothing, For android omly
-    }
+	
+	func setMacAddress(dict: String) -> Void {
+		//do nothing, For android omly
+	}
+	
+	func setIMEI(dict: String) -> Void {
+		//do nothing, For android omly
+	}
 	
 	func getAd(result: FlutterResult) -> Void {
 		result(TrackierSDK.getAd())
