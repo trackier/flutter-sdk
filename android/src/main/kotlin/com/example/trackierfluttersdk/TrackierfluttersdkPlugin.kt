@@ -153,6 +153,14 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "fireInstall" -> {
                 fireInstall()
             }
+            
+            "setIMEI" -> {
+                setIMEI(call, result)
+            }
+            
+            "setMacAddress" -> {
+                setMacAddress(call, result)
+            }
         }
     }
     
@@ -190,7 +198,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             disableOrganic = configMap.get("disableOrganicTracking") as Boolean
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.57")
+        trackierSDKConfig.setSDKVersion("1.6.60")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         trackierSDKConfig.setManualMode(manualmode)
@@ -262,6 +270,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         var currency: String? = null
         var discount: Double? = null
         var couponCode: String? = null
+        var productId: String? = null
         var param1: String? = null
         var param2: String? = null
         var param3: String? = null
@@ -301,6 +310,10 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         if (configMap.containsKey("couponCode")) {
             couponCode = configMap.get("couponCode") as String
             trackierEvent.couponCode = couponCode
+        }
+        if (configMap.containsKey("productId")) {
+            productId = configMap.get("productId") as String
+            trackierEvent.productId = productId
         }
         if (configMap.containsKey("param1")) {
             param1 = configMap.get("param1") as String
@@ -458,5 +471,16 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     
     private fun fireInstall() {
         TrackierSDK.fireInstall()
+    }
+    
+    private fun setIMEI(call: MethodCall, result: MethodChannel.Result) {
+        val imei1 = call.argument<String>("imei1")
+        val imei2 = call.argument<String>("imei2")
+        TrackierSDK.setIMEI(imei1!!, imei2!!)
+    }
+    
+    private fun setMacAddress(call: MethodCall, result: MethodChannel.Result) {
+        val macAddress = call.arguments as String
+        TrackierSDK.setMacAddress(macAddress)
     }
 }
