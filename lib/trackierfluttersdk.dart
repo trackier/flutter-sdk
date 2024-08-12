@@ -139,6 +139,15 @@ class Trackierfluttersdk {
   static void fireInstall() {
     _channel.invokeMethod('fireInstall');
   }
+
+  static void setIMEI(String imei1, String imei2) {
+    final Map<String, dynamic> parameters = {'imei1': imei1, 'imei2': imei2,};
+    _channel.invokeMethod('setIMEI', parameters);
+  }
+  
+  static void setMacAddress(String mac) {
+    _channel.invokeMethod('setMacAddress', mac);
+  }
 }
 
 

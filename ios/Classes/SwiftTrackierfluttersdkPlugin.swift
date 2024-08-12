@@ -12,7 +12,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	
 	public func onDeepLinking(result: trackier_ios_sdk.DeepLink) {
 		var dict = Dictionary<String, Any>()
-		dict["uri"] = result.getUrlParams()
+		dict["uri"] = result.getUrl()
 		self.channel.invokeMethod("deferred-deeplink", arguments: dict)
 	}
 	
@@ -48,6 +48,15 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 			} else if (call.method == "updatePostbackConversion") {
 				let dict = call.arguments as? Int
 				if (dict != nil) { updatePostbackConversion(dict: dict!) }
+			} else if (call.method == "parseDeeplink") {
+				let dict = call.arguments as? String
+				if (dict != nil) { parseDeeplink(dict: dict!) }
+			} else if (call.method == "setIMEI") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setIMEI(dict: dict!) }
+			} else if (call.method == "setMacAddress") {
+				let dict = call.arguments as? String
+				if (dict != nil) { setMacAddress(dict: dict!) }
 			} else if (call.method == "initializeSDK") {
 				let dict = call.arguments as? [String:Any]
 				if (dict != nil) { initializeSDK(dict: dict) }
@@ -84,6 +93,8 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 				getPid(result: result)
 			} else if (call.method == "getIsRetargeting") {
 				getIsRetargeting(result: result)
+			} else if (call.method == "getTrackierId") {
+				getTrackierId(result: result)
 			} else {
 				result(FlutterMethodNotImplemented)
 		}
@@ -132,6 +143,19 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 	func updatePostbackConversion(dict: Int) -> Void {
 		let postbackConversion = dict
 		TrackierSDK.updatePostbackConversion(conversionValue: postbackConversion)
+	}
+	
+	func parseDeeplink(dict: String) -> Void {
+		let parseDeeplinkUrl = dict
+		TrackierSDK.parseDeepLink(uri: parseDeeplinkUrl)
+	}
+	
+	func setMacAddress(dict: String) -> Void {
+		//do nothing, For android omly
+	}
+	
+	func setIMEI(dict: String) -> Void {
+		//do nothing, For android omly
 	}
 	
 	func getAd(result: FlutterResult) -> Void {
@@ -198,6 +222,10 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		result(TrackierSDK.getIsRetargeting())
 	}
 	
+	func getTrackierId(result: FlutterResult) -> Void {
+		result(TrackierSDK.getTrackierId())
+	}
+	
 	func initializeSDK(dict: Optional<Dictionary<String, Any>>) -> Void {
 		let appToken = "\(dict?["appToken"] as? String ?? "")"
 		let environment = "\(dict?["environment"] as? String ?? "")"
@@ -206,7 +234,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.57")
+		config.setSDKVersion(sdkVersion: "1.6.60")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}
