@@ -27,6 +27,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 31
+    namespace "com.example.trackierfluttersdk"
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'

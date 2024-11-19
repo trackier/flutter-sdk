@@ -1,4 +1,3 @@
-## 1.6.60
+## 1.6.61
 
-- update: version upgrade 
-- update: imei support in android and parse deeplink in ios
+- fix: namespace issue
