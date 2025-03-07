@@ -1,3 +1,4 @@
-## 1.6.61
+## 1.6.64
 
-- fix: namespace issue
+- fix: Android Version upgrade 
+- update: Apple Ads Token support

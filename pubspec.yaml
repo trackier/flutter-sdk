@@ -1,6 +1,6 @@
 name: trackier_sdk_flutter
 description: This is trackier flutter SDK
-version: 1.6.61
+version: 1.6.64
 homepage: https://github.com/trackier/flutter-sdk
 
 environment:
@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -20,6 +21,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+
   # This section identifies this Flutter project as a plugin project.
   # The 'pluginClass' and Android 'package' identifiers should not ordinarily
   # be modified. They are used by the tooling to maintain consistency when

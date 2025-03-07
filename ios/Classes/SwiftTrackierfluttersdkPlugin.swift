@@ -48,6 +48,9 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 			} else if (call.method == "updatePostbackConversion") {
 				let dict = call.arguments as? Int
 				if (dict != nil) { updatePostbackConversion(dict: dict!) }
+			} else if (call.method == "updateAppleAdsToken") {
+				let dict = call.arguments as? String
+				if (dict != nil) { updateAppleAdsToken(dict: dict!) }
 			} else if (call.method == "parseDeeplink") {
 				let dict = call.arguments as? String
 				if (dict != nil) { parseDeeplink(dict: dict!) }
@@ -145,6 +148,11 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		TrackierSDK.updatePostbackConversion(conversionValue: postbackConversion)
 	}
 	
+	func updateAppleAdsToken(dict: String) -> Void {
+		let appleAdsToken = dict
+		TrackierSDK.updateAppleAdsToken(token: appleAdsToken)
+	}
+	
 	func parseDeeplink(dict: String) -> Void {
 		let parseDeeplinkUrl = dict
 		TrackierSDK.parseDeepLink(uri: parseDeeplinkUrl)
@@ -234,7 +242,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.61")
+		config.setSDKVersion(sdkVersion: "1.6.64")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}

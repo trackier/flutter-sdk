@@ -53,6 +53,10 @@ class Trackierfluttersdk {
     _channel.invokeMethod('updatePostbackConversion', conversion);
   }
 
+  static void updateAppleAdsToken(String appleToken) {
+    _channel.invokeMethod('updateAppleAdsToken', appleToken);
+  }
+
   static void setUserAdditonalDetail(Map userAdditonalDetail) {
     _channel.invokeMethod('setUserAdditonalDetail', userAdditonalDetail);
   }
