@@ -10,6 +10,8 @@ class TrackerSDKConfig {
   bool manualMode = false;
   bool disableOrganic = false;
 
+  Map<String, dynamic> attributionParams = {};
+
   DeferredDeeplinkCallback? deferredDeeplinkCallback;
 
   static const MethodChannel _channel = const MethodChannel('trackierfluttersdk');
@@ -32,6 +34,11 @@ class TrackerSDKConfig {
 
   void disableOrganicTracking(bool value) {
     this.disableOrganic = value;
+  }
+
+  void setAttributionParams(Map<String, dynamic> params) {
+    attributionParams.clear();
+    attributionParams.addAll(params);
   }
 
   void _initCallbackHandlers() {
@@ -59,7 +66,8 @@ class TrackerSDKConfig {
       'secretKey': secretKey,
       'deeplinkCallback' : _deferredDeeplinkCallbackName,
       'setManualMode' : manualMode,
-      'disableOrganicTracking' : disableOrganic
+      'disableOrganicTracking' : disableOrganic,
+      'attributionParams' : attributionParams
     };
 
     return configMap;

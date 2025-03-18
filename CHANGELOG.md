@@ -1,4 +1,3 @@
-## 1.6.64
+## 1.6.65
 
-- fix: Android Version upgrade 
-- update: Apple Ads Token support
+- update: Apk Tracking Support
