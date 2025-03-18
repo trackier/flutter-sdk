@@ -198,7 +198,27 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             disableOrganic = configMap.get("disableOrganicTracking") as Boolean
         }
         trackierSDKConfig = TrackierSDKConfig(context, appToken, environment)
-        trackierSDKConfig.setSDKVersion("1.6.64")
+        val attribution = AttributionParams()
+        val attributionParams = configMap["attributionParams"] as? Map<String, Any>
+        if (attributionParams != null) {
+            if (attributionParams.containsKey("partnerId")) {
+                attribution.parterId = attributionParams["partnerId"] as String
+            }
+            if (attributionParams.containsKey("ad")) {
+                attribution.ad = attributionParams["ad"] as String
+            }
+            if (attributionParams.containsKey("channel")) {
+                attribution.channel = attributionParams["channel"] as String
+            }
+            if (attributionParams.containsKey("adId")) {
+                attribution.adId = attributionParams["adId"] as String
+            }
+            if (attributionParams.containsKey("siteId")) {
+                attribution.siteId = attributionParams["siteId"] as String
+            }
+        }
+        trackierSDKConfig.setAttributionParams(attribution)
+        trackierSDKConfig.setSDKVersion("1.6.65")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         trackierSDKConfig.setManualMode(manualmode)
