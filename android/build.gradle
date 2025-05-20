@@ -40,6 +40,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.annotation:annotation:1.2.0'
-    implementation 'com.trackier:android-sdk:1.6.64'
+    implementation 'com.trackier:android-sdk:1.6.69'
     implementation 'com.android.installreferrer:installreferrer:2.2'
 }

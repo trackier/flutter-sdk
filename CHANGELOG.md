@@ -1,3 +1,3 @@
-## 1.6.65
+## 1.6.69
 
-- update: Apk Tracking Support
+- fix: attributions params data 
