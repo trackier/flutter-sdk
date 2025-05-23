@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:flutter/services.dart';
 import 'package:trackier_sdk_flutter/trackierevent.dart';
 import 'trackierconfig.dart';
-import 'dart:io' show Platform;
 
 class Trackierfluttersdk {
   static const MethodChannel _channel = const MethodChannel('trackierfluttersdk');
@@ -152,8 +150,38 @@ class Trackierfluttersdk {
   static void setMacAddress(String mac) {
     _channel.invokeMethod('setMacAddress', mac);
   }
-}
 
+  static Future<String> createDynamicLink({
+    required String templateId,
+    required String link,
+    required String domainUriPrefix,
+    required String deepLinkValue,
+    String? androidRedirect,
+    Map<String, String>? sdkParameters,
+    Map<String, String>? attributionParameters,
+    String? iosRedirect,
+    String? desktopRedirect,
+    Map<String, String>? socialMeta,
+  }) async {
+    final args = <String, dynamic>{
+      'templateId': templateId,
+      'link': link,
+      'domainUriPrefix': domainUriPrefix,
+      'deepLinkValue': deepLinkValue,
+      if (androidRedirect != null) 'androidRedirect': androidRedirect,
+      if (sdkParameters != null) 'sdkParameters': sdkParameters,
+      if (attributionParameters != null)
+        'attributionParameters': attributionParameters,
+      if (iosRedirect != null) 'iosRedirect': iosRedirect,
+      if (desktopRedirect != null) 'desktopRedirect': desktopRedirect,
+      if (socialMeta != null) 'socialMeta': socialMeta,
+    };
+
+    final String dynamicLinkUrl =
+    await _channel.invokeMethod('createDynamicLink', args);
+    return dynamicLinkUrl;
+  }
+}
 
 enum Gender {
   Male,

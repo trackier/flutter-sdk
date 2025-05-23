@@ -8,6 +8,11 @@ import android.os.Looper
 import android.util.Log
 import androidx.annotation.NonNull
 import com.trackier.sdk.*
+import com.trackier.sdk.dynamic_link.AndroidParameters
+import com.trackier.sdk.dynamic_link.DesktopParameters
+import com.trackier.sdk.dynamic_link.DynamicLink
+import com.trackier.sdk.dynamic_link.IosParameters
+import com.trackier.sdk.dynamic_link.SocialMetaTagParameters
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -37,7 +42,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "setUserId" -> {
               setUserId(call, result);
             }
-
+            
             "setUserEmail" -> {
               setUserEmail(call, result);
             }
@@ -65,106 +70,180 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             "setUserPhone" -> {
                 setUserPhone(call, result)
             }
-    
+
             "setDOB" -> {
                 setDOB(call, result)
             }
-    
+
             "setGender" -> {
                 setGender(call, result)
             }
-    
+
             "getAd" -> {
                 getAd(call, result)
             }
-    
+
             "getAdID" -> {
                 getAdID(call, result)
             }
-    
+
             "getAdSet" -> {
                 getAdSet(call, result)
             }
-    
+
             "getAdSetID" -> {
                 getAdSetID(call, result)
             }
-    
+
             "getCampaign" -> {
                 getCampaign(call, result)
             }
-    
+
             "getCampaignID" -> {
                 getCampaignID(call, result)
             }
-    
+
             "getChannel" -> {
                 getChannel(call, result)
             }
-    
+
             "getP1" -> {
                 getP1(call, result)
             }
-    
+
             "getP2" -> {
                 getP2(call, result)
             }
-    
+
             "getP3" -> {
                 getP3(call, result)
             }
-    
+
             "getP4" -> {
                 getP4(call, result)
             }
-    
+
             "getP5" -> {
                 getP5(call, result)
             }
-    
+
             "getClickId" -> {
                 getClickId(call, result)
             }
-    
+
             "getDlv" -> {
                 getDlv(call, result)
             }
-    
+
             "getPid" -> {
                 getPid(call, result)
             }
-    
+
             "getIsRetargeting" -> {
                 getIsRetargeting(call, result)
             }
-    
+
             "setPreinstallAttribution" -> {
                 setPreinstallAttribution(call, result)
             }
-            
+
             "setLocalRefTrack" -> {
                 setLocalRefTrack(call, result)
             }
-            
+
             "parseDeeplink" -> {
                 parseDeeplink(call, result)
             }
-            
+
             "fireInstall" -> {
                 fireInstall()
             }
-            
+
             "setIMEI" -> {
                 setIMEI(call, result)
             }
-            
+
             "setMacAddress" -> {
                 setMacAddress(call, result)
             }
+
+            "createDynamicLink" -> {
+                val args = call.arguments as Map<String, Any>
+                try {
+                    val builder = DynamicLink.Builder()
+                        .setTemplateId(args["templateId"] as String)
+                        .setLink(Uri.parse(args["link"] as String))
+                        .setDomainUriPrefix(args["domainUriPrefix"] as String)
+                        .setDeepLinkValue(args["deepLinkValue"] as String)
+
+                    (args["androidRedirect"] as? String)?.let {
+                        builder.setAndroidParameters(
+                            AndroidParameters.Builder()
+                                .setRedirectLink(it)
+                                .build()
+                        )
+                    }
+
+                    (args["sdkParameters"] as? Map<*, *>)?.let { map ->
+                        @Suppress("UNCHECKED_CAST")
+                        builder.setSDKParameters(map as Map<String, String>)
+                    }
+
+                    (args["attributionParameters"] as? Map<*, *>)?.let { map ->
+                        @Suppress("UNCHECKED_CAST")
+                        val at = map as Map<String, String>
+                        builder.setAttributionParameters(
+                            channel = at["channel"] ?: "",
+                            campaign = at["campaign"] ?: "",
+                            mediaSource = at["media_source"] ?: ""
+                        )
+                    }
+
+                    (args["iosRedirect"] as? String)?.let {
+                        builder.setIosParameters(
+                            IosParameters.Builder()
+                                .setRedirectLink(it)
+                                .build()
+                        )
+                    }
+
+                    (args["desktopRedirect"] as? String)?.let {
+                        builder.setDesktopParameters(
+                            DesktopParameters.Builder()
+                                .setRedirectLink(it)
+                                .build()
+                        )
+                    }
+
+                    (args["socialMeta"] as? Map<*, *>)?.let { map ->
+                        @Suppress("UNCHECKED_CAST")
+                        val sm = map as Map<String, String>
+                        builder.setSocialMetaTagParameters(
+                            SocialMetaTagParameters.Builder()
+                                .setTitle(sm["title"] ?: "")
+                                .setDescription(sm["description"] ?: "")
+                                .setImageLink(sm["imageLink"] ?: "")
+                                .build()
+                        )
+                    }
+
+                    // Build and convert to config
+                    val dynamicLink = builder.build()
+                    val config = dynamicLink;
+
+                    // Invoke Trackier SDK
+                    TrackierSDK.createDynamicLink(
+                        config,
+                        onSuccess = { url -> result.success(url) },
+                        onFailure = { err -> result.error("ERROR", err, null) }
+                    )
+                } catch (e: Exception) {
+                    result.error("EXCEPTION", e.localizedMessage, null)
+                }
+            }
         }
     }
-    
-    
+
     private fun initializeSDK(call: MethodCall, result: Result) {
         var appToken = ""
         var environment = ""
@@ -173,7 +252,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         var manualmode = false
         var disableOrganic = false
         val configMap = call.arguments as MutableMap<*, *>
-        
+
         if (configMap.containsKey("appToken")) {
             appToken = configMap.get("appToken") as String
         }
@@ -189,11 +268,11 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         if (configMap.containsKey("environment")) {
             environment = configMap.get("environment") as String
         }
-    
+
         if (configMap.containsKey("setManualMode")) {
             manualmode = configMap.get("setManualMode") as Boolean
         }
-    
+
         if (configMap.containsKey("disableOrganicTracking")) {
             disableOrganic = configMap.get("disableOrganicTracking") as Boolean
         }
@@ -223,7 +302,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         trackierSDKConfig.setManualMode(manualmode)
         trackierSDKConfig.disableOrganicTracking(disableOrganic)
-    
+
         if (configMap.containsKey("deeplinkCallback")) {
             val dartMethodName = configMap["deeplinkCallback"] as String?
             if (dartMethodName != null && channel != null) {
@@ -259,12 +338,12 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         val userPhone = call.arguments as String
         TrackierSDK.setUserPhone(userPhone)
     }
-    
+
     private fun setDOB(call: MethodCall, result: MethodChannel.Result) {
         val dob = call.arguments as String
         TrackierSDK.setDOB(dob)
     }
-    
+
     private fun setGender(call: MethodCall, result: MethodChannel.Result) {
         val gender = call.arguments as String
         when (gender) {
@@ -403,7 +482,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         val installID = TrackierSDK.getTrackierId()
         result.success(installID)
     }
-    
+
     private fun getAd(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getAd())
     }
@@ -413,92 +492,92 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
     private fun getAdSet(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getAdSet())
     }
-    
+
     private fun getAdSetID(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getAdSetID())
     }
-    
+
     private fun getCampaign(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getCampaign())
     }
-    
+
     private fun getCampaignID(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getCampaignID())
     }
-    
+
     private fun getChannel(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getChannel())
     }
-    
+
     private fun getP1(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getP1())
     }
-    
+
     private fun getP2(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getP2())
     }
-    
+
     private fun getP3(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getP3())
     }
-    
+
     private fun getP4(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getP4())
     }
-    
+
     private fun getP5(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getP5())
     }
-    
+
     private fun getClickId(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getClickId())
     }
-    
+
     private fun getDlv(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getDlv())
     }
-    
+
     private fun getPid(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getPid())
     }
-    
+
     private fun getIsRetargeting(call: MethodCall, result: Result) {
         result.success(TrackierSDK.getIsRetargeting())
     }
-    
+
     private fun setPreinstallAttribution(call: MethodCall, result: Result) {
         val pid = call.argument<String>("pid").toString()
         val campaign = call.argument<String>("campaign").toString()
         val campaignId = call.argument<String>("campaignId").toString()
         TrackierSDK.setPreinstallAttribution(pid, campaign, campaignId)
     }
-    
+
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
-    
+
     private fun setLocalRefTrack(call: MethodCall, result: MethodChannel.Result) {
         val boolValue = call.argument<Boolean>("boolValue")
         val delimeter = call.argument<String>("delimeter")
         TrackierSDK.setLocalRefTrack(boolValue!!, delimeter!!)
     }
-    
+
     private fun parseDeeplink(call: MethodCall, result: MethodChannel.Result) {
         val uriDeeplink = call.arguments as String
         val uri = Uri.parse(uriDeeplink)
         TrackierSDK.parseDeepLink(uri)
     }
-    
+
     private fun fireInstall() {
         TrackierSDK.fireInstall()
     }
-    
+
     private fun setIMEI(call: MethodCall, result: MethodChannel.Result) {
         val imei1 = call.argument<String>("imei1")
         val imei2 = call.argument<String>("imei2")
         TrackierSDK.setIMEI(imei1!!, imei2!!)
     }
-    
+
     private fun setMacAddress(call: MethodCall, result: MethodChannel.Result) {
         val macAddress = call.arguments as String
         TrackierSDK.setMacAddress(macAddress)
