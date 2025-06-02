@@ -69,6 +69,18 @@ class Trackierfluttersdk {
     return installID;
   }
 
+  static Future<String> resolveDeeplinkUrl(String inputUrl) async {
+    try {
+      final String result = await _channel.invokeMethod('resolveDeeplinkUrl', {
+        'url': inputUrl,
+      });
+      return result;
+    } catch (e) {
+      print('TrackierSDK.resolveDeeplinkUrl error: $e');
+      return '';
+    }
+  }
+
   static Future<String> getAd() async {
     return await _channel.invokeMethod('getAd');
   }

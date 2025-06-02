@@ -241,6 +241,13 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
                     result.error("EXCEPTION", e.localizedMessage, null)
                 }
             }
+
+            "resolveDeeplinkUrl" -> {
+                val url = call.argument<String>("url") ?: ""
+                TrackierSDK.resolveDeeplinkUrl(url) { resolved ->
+                    result.success(resolved)
+                }
+            }
         }
     }
 
