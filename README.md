@@ -25,6 +25,7 @@
 - [SDK Signing](#qs-sdk-signing)
 - [Deep linking](#gs-deeplink)
 - [Getting Campaign Data](#gs-campaign-data)
+- [Dynamic Deeplinks](#qs-dynamic-deeplinks)
 - [Proguard Settings](#qs-progaurd-trackier-sdk)
 
 ## <a id="qs-add-trackier-sdk"></a>Quick start guide
@@ -556,7 +557,42 @@ class _MyAppState extends State<MyApp> {
   }
 
 ```
+### <a id="qs-dynamic-deeplinks"></a> Dynamic Deeplinks
+We have added support for creating dynamic deep links using Flutter on both Android and iOS platforms.
+To generate a dynamic deep link, you need to call the following Dart function from your code:
 
+```dart
+Trackierfluttersdk.createDynamicLink(
+  templateId: 'wy23Px',
+  link: 'https://trackier58.u9ilnk.me',
+  domainUriPrefix: 'trackier58.u9ilnk.me',
+  deepLinkValue: 'CakeActivity',
+  androidRedirect: 'https://play.google.com/store/apps/details?id=com.trackier.vistmarket',
+  sdkParameters: {
+    'product_id': 'chocochip',
+    'quantity': '2',
+  },
+  attributionParameters: {
+    'channel': 'my_channel',
+    'media_source': 'at_invite',
+    'campaign': 'sanu',
+  },
+  iosRedirect: 'https://www.example.com/ios',
+  desktopRedirect: 'https://trackier.com',
+  socialMeta: {
+    'title': 'Your Title',
+    'description': 'Your Description',
+    'imageLink': 'https://www.example.com/image.jpg',
+  },
+).then((url) {
+  // Success callback
+  print('Deep Link URL: $url');
+}).catchError((err) {
+  // Error callback
+  print('Failed to create link: $err');
+});
+
+```
 
 ### <a id="gs-campaign-data"></a> Getting Campaign Data
 For getting the campaign data, We have a function that return the campaign data. Please check below the example code.
