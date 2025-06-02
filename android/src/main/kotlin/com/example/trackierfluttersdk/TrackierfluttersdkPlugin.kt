@@ -248,6 +248,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
                     result.success(resolved)
                 }
             }
+            else -> result.notImplemented()
         }
     }
 
@@ -304,7 +305,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             }
         }
         trackierSDKConfig.setAttributionParams(attribution)
-        trackierSDKConfig.setSDKVersion("1.6.69")
+        trackierSDKConfig.setSDKVersion("1.6.71")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         trackierSDKConfig.setManualMode(manualmode)
