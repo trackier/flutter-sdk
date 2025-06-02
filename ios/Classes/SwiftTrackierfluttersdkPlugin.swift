@@ -189,9 +189,9 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 					result(FlutterError(code: "EXCEPTION", message: error.localizedDescription, details: nil))
 				}
 				
-            } else if (call.method == "resolveDeeplinkUrl") {
-                
-            }
+			} else if (call.method == "resolveDeeplinkUrl") {
+				
+			}
 			else {
 			result(FlutterMethodNotImplemented)
 		}
