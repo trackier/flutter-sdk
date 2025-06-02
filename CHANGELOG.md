@@ -1,3 +1,3 @@
-## 1.6.69
+## 1.6.71
 
-- fix: attributions params data 
+- feat: dynamic deeplinks 
