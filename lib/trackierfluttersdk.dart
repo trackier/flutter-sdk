@@ -71,6 +71,49 @@ class Trackierfluttersdk {
     return installID;
   }
 
+  static Future<String> createDynamicLink({
+    required String templateId,
+    required String link,
+    required String domainUriPrefix,
+    required String deepLinkValue,
+    String? androidRedirect,
+    Map<String, String>? sdkParameters,
+    Map<String, String>? attributionParameters,
+    String? iosRedirect,
+    String? desktopRedirect,
+    Map<String, String>? socialMeta,
+  }) async {
+    final args = <String, dynamic>{
+      'templateId': templateId,
+      'link': link,
+      'domainUriPrefix': domainUriPrefix,
+      'deepLinkValue': deepLinkValue,
+      if (androidRedirect != null) 'androidRedirect': androidRedirect,
+      if (sdkParameters != null) 'sdkParameters': sdkParameters,
+      if (attributionParameters != null)
+        'attributionParameters': attributionParameters,
+      if (iosRedirect != null) 'iosRedirect': iosRedirect,
+      if (desktopRedirect != null) 'desktopRedirect': desktopRedirect,
+      if (socialMeta != null) 'socialMeta': socialMeta,
+    };
+
+    final String dynamicLinkUrl =
+    await _channel.invokeMethod('createDynamicLink', args);
+    return dynamicLinkUrl;
+  }
+  
+  static Future<String> resolveDeeplinkUrl(String inputUrl) async {
+    try {
+      final String result = await _channel.invokeMethod('resolveDeeplinkUrl', {
+        'url': inputUrl,
+      });
+      return result;
+    } catch (e) {
+      print('TrackierSDK.resolveDeeplinkUrl error: $e');
+      return '';
+    }
+  }
+
   static Future<String> getAd() async {
     return await _channel.invokeMethod('getAd');
   }

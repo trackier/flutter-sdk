@@ -1,3 +1,3 @@
-## 1.6.65
+## 1.6.71
 
-- update: Apk Tracking Support
+- feat: dynamic deeplinks 

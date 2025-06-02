@@ -98,8 +98,102 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 				getIsRetargeting(result: result)
 			} else if (call.method == "getTrackierId") {
 				getTrackierId(result: result)
-			} else {
-				result(FlutterMethodNotImplemented)
+			} else if (call.method == "createDynamicLink") {
+				guard let args = call.arguments as? [String: Any] else {
+					result(FlutterError(code: "INVALID_ARGUMENTS", message: "Invalid arguments", details: nil))
+					return
+				}
+				do {
+					let builder = DynamicLink.Builder()
+					
+					// Required Parameters
+					if let templateId = args["templateId"] as? String {
+						builder.setTemplateId(templateId)
+					}
+					if let link = args["link"] as? String {
+						builder.setLink(link)
+					}
+					if let domainUriPrefix = args["domainUriPrefix"] as? String {
+						builder.setDomainUriPrefix(domainUriPrefix)
+					}
+					if let deepLinkValue = args["deepLinkValue"] as? String {
+						builder.setDeepLinkValue(deepLinkValue)
+					}
+
+					// Android Redirection
+					if let androidRedirect = args["androidRedirect"] as? String {
+						let androidParams = AndroidParameters.Builder()
+							.setRedirectLink(androidRedirect)
+							.build()
+						builder.setAndroidParameters(androidParams)
+					}
+
+					// iOS Redirection
+					if let iosRedirect = args["iosRedirect"] as? String {
+						let iosParams = IosParameters.Builder()
+							.setRedirectLink(iosRedirect)
+							.build()
+						builder.setIosParameters(iosParams)
+					}
+
+					// Desktop Redirection
+					if let desktopRedirect = args["desktopRedirect"] as? String {
+						let desktopParams = DesktopParameters.Builder()
+							.setRedirectLink(desktopRedirect)
+							.build()
+						builder.setDesktopParameters(desktopParams)
+					}
+
+					// SDK Parameters
+					if let sdkParams = args["sdkParameters"] as? [String: String] {
+						builder.setSDKParameters(sdkParams)
+					}
+
+					// Attribution Parameters
+					if let attrParams = args["attributionParameters"] as? [String: String] {
+						builder.setAttributionParameters(
+							channel: attrParams["channel"] ?? "",
+							campaign: attrParams["campaign"] ?? "",
+							mediaSource: attrParams["media_source"] ?? "",
+							p1: attrParams["p1"] ?? "",
+							p2: attrParams["p2"] ?? "",
+							p3: attrParams["p3"] ?? "",
+							p4: attrParams["p4"] ?? "",
+							p5: attrParams["p5"] ?? ""
+						)
+					}
+
+					// Social Meta Tag Parameters
+					if let socialMeta = args["socialMeta"] as? [String: String] {
+						let metaParams = SocialMetaTagParameters.Builder()
+							.setTitle(socialMeta["title"] ?? "")
+							.setDescription(socialMeta["description"] ?? "")
+							.setImageLink(socialMeta["imageLink"] ?? "")
+							.build()
+						builder.setSocialMetaTagParameters(metaParams)
+					}
+
+					let dynamicLink = builder.build()
+					// Call Trackier SDK (replace this with actual SDK logic)
+					TrackierSDK.createDynamicLink(
+						dynamicLink: dynamicLink,
+						onSuccess: { url in
+							result(url)
+						},
+						onFailure: { error in
+							result(FlutterError(code: "ERROR", message: error, details: nil))
+						}
+					)
+
+				} catch let error {
+					result(FlutterError(code: "EXCEPTION", message: error.localizedDescription, details: nil))
+				}
+				
+			} else if (call.method == "resolveDeeplinkUrl") {
+				
+			}
+			else {
+			result(FlutterMethodNotImplemented)
 		}
 	}
 	
@@ -234,6 +328,8 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		result(TrackierSDK.getTrackierId())
 	}
 	
+   
+	
 	func initializeSDK(dict: Optional<Dictionary<String, Any>>) -> Void {
 		let appToken = "\(dict?["appToken"] as? String ?? "")"
 		let environment = "\(dict?["environment"] as? String ?? "")"
@@ -242,7 +338,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.65")
+		config.setSDKVersion(sdkVersion: "1.6.71")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}
