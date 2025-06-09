@@ -1,3 +1,3 @@
-## 1.6.71
+## 1.6.72
 
-- feat: dynamic deeplinks 
+- update: resolved Deeplinks functions

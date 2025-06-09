@@ -190,7 +190,31 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 				}
 				
 			} else if (call.method == "resolveDeeplinkUrl") {
-				
+				if let args = call.arguments as? [String: Any],
+					let urlString = args["url"] as? String {
+					TrackierSDK.resolveDeeplinkUrl(inputUrl: urlString) { sdkResult in
+								switch sdkResult {
+								case .success(let dlData):
+									var resultMap: [String: Any] = ["url": dlData.url]
+
+									if let sdkParams = dlData.sdkParams {
+										resultMap["sdkParams"] = sdkParams
+									}
+
+									result(resultMap)
+
+								case .failure(let error):
+									result(FlutterError(code: "RESOLVE_FAILED",
+														message: error.localizedDescription,
+														details: nil))
+								}
+							}
+
+						} else {
+							result(FlutterError(code: "INVALID_ARGUMENTS",
+											message: "Missing URL argument",
+											details: nil))
+					}
 			}
 			else {
 			result(FlutterMethodNotImplemented)
@@ -328,7 +352,6 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		result(TrackierSDK.getTrackierId())
 	}
 	
-   
 	
 	func initializeSDK(dict: Optional<Dictionary<String, Any>>) -> Void {
 		let appToken = "\(dict?["appToken"] as? String ?? "")"
@@ -338,7 +361,7 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
-		config.setSDKVersion(sdkVersion: "1.6.71")
+		config.setSDKVersion(sdkVersion: "1.6.72")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}

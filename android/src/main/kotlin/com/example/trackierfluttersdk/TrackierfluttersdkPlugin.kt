@@ -244,9 +244,19 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
 
             "resolveDeeplinkUrl" -> {
                 val url = call.argument<String>("url") ?: ""
-                TrackierSDK.resolveDeeplinkUrl(url) { resolved ->
-                    result.success(resolved)
-                }
+                TrackierSDK.resolveDeeplinkUrl(
+                    url,
+                    onSuccess = { dlData ->
+                        val resultMap = mapOf(
+                            "url" to dlData.url,
+                            "sdkParams" to dlData.sdkParams // assuming this is a Map<String, String>
+                        )
+                        result.success(resultMap)
+                    },
+                    onError = { error ->
+                        result.error("RESOLVE_DEEPLINK_FAILED", error.localizedMessage, null)
+                    }
+                )
             }
             else -> result.notImplemented()
         }
@@ -305,7 +315,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             }
         }
         trackierSDKConfig.setAttributionParams(attribution)
-        trackierSDKConfig.setSDKVersion("1.6.71")
+        trackierSDKConfig.setSDKVersion("1.6.72")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         trackierSDKConfig.setManualMode(manualmode)
@@ -347,12 +357,12 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         TrackierSDK.setUserPhone(userPhone)
     }
 
-    private fun setDOB(call: MethodCall, result: MethodChannel.Result) {
+    private fun setDOB(call: MethodCall, result: Result) {
         val dob = call.arguments as String
         TrackierSDK.setDOB(dob)
     }
 
-    private fun setGender(call: MethodCall, result: MethodChannel.Result) {
+    private fun setGender(call: MethodCall, result: Result) {
         val gender = call.arguments as String
         when (gender) {
             "Gender.Male" -> TrackierSDK.setGender(TrackierSDK.Gender.Male)
@@ -564,13 +574,13 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(null)
     }
 
-    private fun setLocalRefTrack(call: MethodCall, result: MethodChannel.Result) {
+    private fun setLocalRefTrack(call: MethodCall, result: Result) {
         val boolValue = call.argument<Boolean>("boolValue")
         val delimeter = call.argument<String>("delimeter")
         TrackierSDK.setLocalRefTrack(boolValue!!, delimeter!!)
     }
 
-    private fun parseDeeplink(call: MethodCall, result: MethodChannel.Result) {
+    private fun parseDeeplink(call: MethodCall, result: Result) {
         val uriDeeplink = call.arguments as String
         val uri = Uri.parse(uriDeeplink)
         TrackierSDK.parseDeepLink(uri)
@@ -580,13 +590,13 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         TrackierSDK.fireInstall()
     }
 
-    private fun setIMEI(call: MethodCall, result: MethodChannel.Result) {
+    private fun setIMEI(call: MethodCall, result: Result) {
         val imei1 = call.argument<String>("imei1")
         val imei2 = call.argument<String>("imei2")
         TrackierSDK.setIMEI(imei1!!, imei2!!)
     }
 
-    private fun setMacAddress(call: MethodCall, result: MethodChannel.Result) {
+    private fun setMacAddress(call: MethodCall, result: Result) {
         val macAddress = call.arguments as String
         TrackierSDK.setMacAddress(macAddress)
     }
