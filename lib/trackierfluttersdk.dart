@@ -101,16 +101,21 @@ class Trackierfluttersdk {
     await _channel.invokeMethod('createDynamicLink', args);
     return dynamicLinkUrl;
   }
-  
-  static Future<String> resolveDeeplinkUrl(String inputUrl) async {
+
+  static Future<Map<String, dynamic>> resolveDeeplinkUrl(String inputUrl) async {
     try {
-      final String result = await _channel.invokeMethod('resolveDeeplinkUrl', {
+      final result = await _channel.invokeMethod('resolveDeeplinkUrl', {
         'url': inputUrl,
       });
-      return result;
+
+      if (result is Map) {
+        return Map<String, dynamic>.from(result);
+      } else {
+        throw Exception("Unexpected result type: ${result.runtimeType}");
+      }
     } catch (e) {
       print('TrackierSDK.resolveDeeplinkUrl error: $e');
-      return '';
+      return {};
     }
   }
 
@@ -196,7 +201,6 @@ class Trackierfluttersdk {
     _channel.invokeMethod('setMacAddress', mac);
   }
 }
-
 
 enum Gender {
   Male,
